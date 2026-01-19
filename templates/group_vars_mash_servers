@@ -6583,7 +6583,7 @@ ilmo_container_labels_traefik_tls_certResolver: "{{ traefik_certResolver_primary
 #                                                                      #
 ########################################################################
 
-immich_enabled: false
+immich_enabled: true
 
 immich_identifier: "{{ mash_playbook_service_identifier_prefix }}immich"
 

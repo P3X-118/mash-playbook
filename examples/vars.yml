@@ -207,7 +207,7 @@ miniflux_admin_password: a-strong-password-here
 # This service is only here as an example. If you don't wish to use the
 # Uptime Kuma service, remove the whole section.
 
-uptime_kuma_enabled: true
+uptime_kuma_enabled: false
 
 uptime_kuma_hostname: uptime-kuma.example.com
 
