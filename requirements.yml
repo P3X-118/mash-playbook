@@ -120,7 +120,7 @@
 #  name: collabora_online
 #  activation_prefix: collabora_online_
 - src: git+https://github.com/P3X-118/ansible-role-container-socket-proxy.git
-  version: v0.4.2-0
+  version: v0.4.2-1
   name: container_socket_proxy
   activation_prefix: mash_
 - src: git+https://github.com/P3X-118/ansible-role-convertx.git
@@ -480,9 +480,12 @@
 #  name: navidrome
 #  activation_prefix: navidrome_
 - src: git+https://github.com/P3X-118/ansible-role-neko.git
-  version: v3.0.9-0
+  version: v3.0.9-1
   name: neko
   activation_prefix: neko_
+- src: git+https://github.com/P3X-118/ar-mirotalk.git 
+  version: v0.0.1
+  activation_prefix: mirotalk_
 #- src: git+https://github.com/P3X-118/ansible-role-netbox.git
 #  version: v3.7.0-2.8.0-2
 #  name: netbox
@@ -544,7 +547,7 @@
 #  name: overseerr
 #  activation_prefix: overseerr_
 - src: git+https://github.com/P3X-118/ansible-role-owncast.git
-  version: v0.2.3-5
+  version: v0.2.3-6
   name: owncast
   activation_prefix: owncast_
 #- src: git+https://github.com/P3X-118/ansible-role-oxitraffic.git

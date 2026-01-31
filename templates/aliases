@@ -1,0 +1,355 @@
+#!/usr/bin/env bash
+# Make sure to add -e if being run by packer
+#******************** 
+# Easier Navigations
+#********************
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias v="vim"
+alias va="vi ~/.aliases"
+alias vsah="vi ~/.ansible/hosts"
+
+alias vsh="vi ~/.ssh/config"
+
+##############################
+# Admin Tools
+###############################
+alias reboot="sudo shutdown -r now"
+
+# Password generator that pipes output to clipboard for instapasting - example: pgen 64
+pgen(){
+  openssl rand -base64 48 | cut -c1-$@ | xclip -selection clipboard
+}
+
+
+#********************
+# Kubernetes
+#********************
+alias k2="kubectl --kubeconfig ~/.kube/two"
+alias k="kubectl"
+alias kt="kubectx"
+alias kpa="kubectl get pods -o wide -A"
+
+#********************
+# Molecule
+#********************
+alias mc="molecule converge"
+alias m="molecule"
+# Molecule Init function
+minit(){
+  time molecule init role $@ --driver-name docker
+}
+alias mdomb="m destroy"
+alias tf="terraform"
+alias mk="minikube"
+
+#*******************
+# SystemDeeze
+#*******************
+
+sysd() {
+  sudo grep -R $@ /etc/systemd /usr/lib/systemd /lib/systemd 2>/dev/null
+}
+
+
+#********************
+# Docker
+#********************
+# Apps
+alias sfile="docker-compose -f /home/oneill/WorkBench/sfile.yml up -d"
+# Get Active Containers
+alias dps="docker ps"
+dps1(){
+  docker ps | awk 'NR==2 {print $1}' | xclip -selection clipboard
+}
+alias dpsa="docker ps -a"
+alias dpsq="docker ps -qa"
+
+alias dc="docker-compose $@"
+
+#Get Images
+alias dim="docker images"
+# Get Volumes
+alias dvo="docker volume list"
+
+# Get Container Network Info
+dip(){
+  docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $@
+}
+
+# Enter Docker Interactive Mode with Bash
+dex(){
+  docker exec -it $@ /bin/bash
+}
+
+dru(){
+  docker run -it $@ /bin/bash
+}
+
+drun(){
+  docker run -dt $@ /bin/bash
+}
+
+# Kill Running Containers
+alias dkil="docker kill $@"
+alias dkill="docker kill $(docker ps -q)"
+
+dsweep(){
+  docker kill $(docker ps -q)
+  wait
+  docker rm $(docker ps -qa)
+}
+
+dclean(){
+  docker kill $(docker ps -q)
+  wait
+  docker rm -f $(docker ps -qa)
+  wait
+  docker rmi -f $(docker images -qa)
+  wait
+  docker network prune
+}
+
+dnuke() {
+  docker volume rm $(docker volume ls -q)
+}
+
+drm() { 
+  docker volume rm $@
+}
+
+
+#********************
+# Shortcuts
+#********************
+alias sj="ssh jon5"
+alias dj="ssh djon5"
+alias ifi="ifconfig | grep inet"
+alias d="cd ~/Documents/"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias key="cd ~/.ssh"
+alias vwg="sudo vi /etc/wireguard/wg0-client.conf"
+# Personal ~~~~~~~~~
+# Can i use varialbe here for Atom?
+alias a="ansible"
+alias am="ansible -m"
+alias amp="ansible -m ping"
+alias dots="cd ~/Documents/*/OSX/dotFiles/"
+alias c="cd " $1
+alias ter="cd ~/Documents/Terraform"
+alias toy="cd ~/Documents/Trace3/Clients/Toyota"
+
+alias starstop="sudo launchctl unload /Library/LaunchDaemons/us.p2x-3yz.stargate.plist"
+
+alias iflush="sudo ifconfig en0 down && sudo ifconfig en0 up"
+
+# Wireguard
+alias wgup="sudo wg-quick up wg0-client"
+alias w2up="sudo wg-quick up lo0-client"
+alias wgd="sudo wg-quick down wg0-client"
+alias w2d="sudo wg-quick down lo0-client"
+
+#============================================
+# SITES
+#============================================
+alias sites="cd ~/Documents/*/Sites"
+alias ynt="cd ~/Documents/Sites/YourNewToys/Trellis"
+alias nice="cd ~/Documents/Sites/Nice/Trellis"
+alias mr="cd ~/Documents/Sites/MarketReactor"
+alias pcclt="cd ~/Documents/Sites/PCCLT/Trellis"
+alias spray="cd ~/Documents/Sites/SprayStorm/Trellis"
+alias pp="cd ~/Documents/Sites/Spray/Trellis"
+
+alias osx="cd ~/Documents/*/osx"
+alias ansi="cd ~/Documents/*/Ansible"
+# ~~~~~~~~~~~~~~~~~~
+alias gs="git status"
+alias gpa="git push --all"
+alias gb="git branch"
+alias gcb="git checkout -b"
+alias gc="git checkout"
+
+alias tim='ansible d10 -b -m service -a "name=systemd-timesyncd state=restarted"'
+#alias tim="ansible d10 -m service -a 'systemctl restart systemd-timesyncd'"
+alias ap="ansible-playbook"
+
+alias h="history"
+alias hg="history|grep"
+hg(){
+  history|grep $@
+}
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+	export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+else # macOS `ls`
+	export LSCOLORS='gxfxcxdxbxegedabagacad'
+fi
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# Le Listing
+# Differentiate Directories from Files with 'ls' command colorized now
+# 
+
+# -F show directory slashes; -G enable colorized output; -l list long; -L follow sym links; -A List all entries but . and ..; 
+# -h human readable file sizes; -t sort by time last modified; -p directory slashes; -S sort by size;
+
+alias ls='CLICOLOR_FORCE=1 ls -F'
+# All Seeing List Eye
+alias ll='ls -FllAhp'
+alias l='ls -FLlhp'
+alias lS='ls -FlAhtpS'
+alias lm='ls -FlAhtp'
+alias lc='ls -FlAhtU'
+
+alias v='vi '
+
+#Figure out what fgrep and egrep are useful for, until then, just color grep
+alias grep='grep -i --color=auto'
+#alias fgrep='fgrep --color=auto'
+#alais egrep='egrep --color=auto'
+
+# Not sure if need- Enable aliases to be sudo'ed
+alias chucknorris='sudo '
+
+# Get week number
+alias week='date +%V'
+
+# Get macOS Software Updates, and update installed brew and npm stuffs
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g;'
+
+# Flush Directory Service cache
+alias flush="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say flushed"
+
+# Recursively delete '.DS_Store' files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# TEST THIS~~~
+# Empty the Trash on all mounted volumes and the main HDD.
+# Also, clear Apple’s System Logs to improve shell startup speed.
+# Finally, clear download history from quarantine. https://mths.be/bum
+#alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+# Set FaceTime to Auto Answer
+alias dog="defaults write com.apple.FaceTime AutoAcceptInvites -bool true && killall SystemUIServer"
+alias doge="defaults write com.apple.FaceTime AutoAcceptInvites -bool false && killall SystemUIServer"
+
+# Hide/show all desktop icons 
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# Disable Spotlight
+alias spotoff="sudo mdutil -a -i off"
+# Enable Spotlight
+alias spoton="sudo mdutil -a -i on"
+
+alias stfu="osascript -e 'set volume output muted true'"
+alias pumpitup="osascript -e 'set volume 7'"
+
+# kuber
+alias ktl="kubectl"
+
+# Kill all chrome tabs 
+alias chred="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# Lock the screen (when going AFK)
+alias afk="/System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
+
+# Reload the shell
+alias shell="exec $SHELL -l"
+
+# Enable Screen Sharing
+syes(){
+  sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
+  sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.screensharing.plist
+}
+# Disable Screen Sharing
+sno(){
+  sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
+  sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.screensharing.plist
+}
+
+#**************************
+#********UTILITIES
+#**************************
+
+# ifconfig | grep inet
+alias ifc="ifconfig | grep inet"
+
+# SSH
+#alias rdp="ssh -tt iwn ssh -tt mpadgett@L-MPadgett.imad.intuitivemachines.com ssh -i /home/mpadgett/.ssh/dilbert -R 3389:localhost:3389 mpadgett@192.168.11.21"
+
+#~ List all launch agents
+alias demon="ls -la /Library/LaunchAgents /Library/LaunchDaemons"
+
+# tree laze
+t(){
+  if [ $# -eq 0 ]
+    then
+      tree
+    else
+      tree -L $@
+ fi
+}
+  
+#alias t="tree -L " $@
+
+alias tl="tree -L " $@
+alias cp="cp -iv"
+alias mv="mv -iv"
+# Vagrant Shortcut
+alias vag="vagrant"
+# Vagrant List Machines
+alias vgs="vagrant global-status"
+# Vagrant Destroy $1 -f
+alias vd="vagrant destroy " $1
+# Open Chrome
+alias og="open -a 'Google Chrome'"
+# Human Readable Filesize Information for current directory
+#alias du="du -hd"
+# List listenening ports
+alias lsp="sudo lsof -i -n -P | grep LISTEN"
+alias cip="curl icanhazip.com"
+# This requires a brew install brew cask install switchaudio-osx
+alias snd="SwitchAudioSource -a"
+# AWS Route53
+alias ar5="aws route53"
+
+# Can't the fuck remember tar -xzvf or whatever the hell? Good, just type extract(<filename>) withouth the <> and hit enter, and this will rectumfy it. 
+extract () {
+	if [ -f $1 ] ; then
+  	case $1 in
+     *.tar.bz2)   tar xjf $1     ;;
+     *.tar.gz)    tar xzf $1     ;;
+     *.bz2)       bunzip2 $1     ;;
+     *.rar)       unrar e $1     ;;
+     *.gz)        gunzip $1      ;;
+     *.tar)       tar xf $1      ;;
+     *.tbz2)      tar xjf $1     ;;
+     *.tgz)       tar xzf $1     ;;
+     *.zip)       unzip $1       ;;
+     *.Z)         uncompress $1  ;;
+     *.7z)        7z x $1        ;;
+     *)     echo "'$1' cannot be extracted via extract()" ;;
+      esac
+  else
+      echo "'$1' is not a valid file"
+  fi
+}
+
+#Recon
+alias dnsdump="/home/oneill/Documents/Dave/RECON/dnsdumpster/dnsdumpster.py -d $@"
+
+alias pd='popd'
+alias act="source env/bin/activate"
+
+alias grb="git -r branch"
+alias grs="git remote add upstream $1" 
+alias grf="git remote fetch upstream"

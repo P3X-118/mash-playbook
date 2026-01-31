@@ -23,7 +23,7 @@
 
 # Put a strong secret below, generated with `pwgen -s 64 1` or in another way
 # Various other secrets will be derived from this secret automatically.
-mash_playbook_generic_secret_key: ''
+sgc_pgsk: ''
 
 ########################################################################
 #                                                                      #
@@ -98,7 +98,7 @@ devture_timesync_installation_enabled: true
 
 # We're relying on the matrix-docker-ansible-deploy playbook to manage Traefik,
 # so tell mash-playbook about it.
-mash_playbook_reverse_proxy_type: other-traefik-container
+rev_proxy_type: other-traefik-container
 
 # Tell the playbook to attach services which require reverse-proxying to an additional network by default (e.g. traefik)
 # This needs to match your Traefik network.

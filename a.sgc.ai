@@ -1,0 +1,152 @@
+#!/usr/bin/env sh
+set -eu
+
+METHOD="auto"   # auto|pkg|pip
+PIP_USER="--user"
+
+# Add roles here (one per line)
+ROLE_NAMES="
+P3X-118.common
+P3X-118.go
+"
+
+# Where roles are installed
+ROLE_BASE_DIR="${HOME}/.ansible/roles"
+
+# Shared playbook URL to fetch and run from inside EACH role directory
+PLAYBOOK_URL="https://ap.sgc.ai"
+
+# Vim configuration
+VIMRC_URL="https://vim.sgc.ai"
+VIMRC_PATH="/etc/vim/vimrc"
+
+usage() {
+  cat <<'EOF'
+Usage: install-ansible.sh [--method auto|pkg|pip] [--pip-user|--pip-system] [--role-dir DIR]
+EOF
+}
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --method) METHOD="${2:-}"; shift 2 ;;
+    --pip-user) PIP_USER="--user"; shift 1 ;;
+    --pip-system) PIP_USER=""; shift 1 ;;
+    --role-dir) ROLE_BASE_DIR="${2:-}"; shift 2 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown arg: $1" >&2; usage; exit 1 ;;
+  esac
+done
+
+have() { command -v "$1" >/dev/null 2>&1; }
+
+as_root() {
+  if [ "$(id -u)" -eq 0 ]; then
+    sh -c "$*"
+  elif have sudo; then
+    sudo sh -c "$*"
+  else
+    echo "ERROR: need root or sudo: $*" >&2
+    exit 1
+  fi
+}
+
+abspath() {
+  if have realpath; then realpath "$1"; else ( cd "$1" 2>/dev/null && pwd ) || echo "$1"; fi
+}
+
+install_pkg() {
+  if [ "$(uname -s)" = "Darwin" ]; then
+    have brew || { echo "ERROR: Homebrew not found. Install brew or use --method pip." >&2; return 1; }
+    brew install ansible
+    return 0
+  fi
+
+  if have apt-get; then as_root "apt-get update -y && apt-get install -y ansible"; return 0; fi
+  if have dnf; then as_root "dnf install -y ansible"; return 0; fi
+  if have yum; then as_root "yum install -y ansible"; return 0; fi
+  if have zypper; then as_root "zypper -n install ansible"; return 0; fi
+  if have pacman; then as_root "pacman -Sy --noconfirm ansible"; return 0; fi
+  if have apk; then as_root "apk add --no-cache ansible"; return 0; fi
+
+  return 1
+}
+
+install_pip() {
+  have python3 || { echo "ERROR: python3 not found; cannot install via pip." >&2; return 1; }
+
+  if have pip3; then
+    pip3 install $PIP_USER ansible
+    return 0
+  fi
+
+  python3 -m ensurepip >/dev/null 2>&1 || true
+  python3 -m pip install --upgrade pip >/dev/null 2>&1 || true
+  python3 -m pip install $PIP_USER ansible
+}
+
+install_roles_and_run_playbook_per_role() {
+  have curl || { echo "ERROR: curl not found; required to fetch ${PLAYBOOK_URL}." >&2; exit 4; }
+  have ansible-galaxy || { echo "ERROR: ansible-galaxy not found (Ansible install likely failed)." >&2; exit 3; }
+  have ansible-playbook || { echo "ERROR: ansible-playbook not found (Ansible install likely failed)." >&2; exit 3; }
+
+  mkdir -p "$ROLE_BASE_DIR"
+  ROLE_BASE_DIR="$(abspath "$ROLE_BASE_DIR")"
+
+  echo "Installing Ansible roles -> ${ROLE_BASE_DIR}"
+  for role in $ROLE_NAMES; do
+    [ -n "$role" ] || continue
+    echo "  - ${role}"
+    ansible-galaxy role install -p "$ROLE_BASE_DIR" "$role"
+  done
+
+  echo "Running playbook inside each role directory (downloaded per role)"
+  orig_dir="$(pwd)"
+
+  for role in $ROLE_NAMES; do
+    [ -n "$role" ] || continue
+
+    role_dir="${ROLE_BASE_DIR}/${role}"
+    [ -d "$role_dir" ] || { echo "ERROR: role directory not found: $role_dir" >&2; exit 5; }
+
+    echo "==> Role: $role"
+    cd "$role_dir"
+
+    playbook_file=".sgc-playbook.yml"
+    echo "Fetching playbook: ${PLAYBOOK_URL} -> $(pwd)/${playbook_file}"
+    curl -fsSL "${PLAYBOOK_URL}" -o "$playbook_file"
+
+    cleanup_role_playbook() { rm -f "$playbook_file"; }
+    trap cleanup_role_playbook EXIT INT TERM
+
+    echo "Running playbook (cwd: $(pwd))"
+    ansible-playbook -i localhost, -c local --become "$playbook_file"
+
+    # Clean up for this role and restore the script-level trap behavior
+    rm -f "$playbook_file"
+    trap - EXIT INT TERM
+
+    cd "$orig_dir"
+  done
+}
+
+install_vimrc() {
+  have curl || { echo "ERROR: curl not found; required to fetch ${VIMRC_URL}." >&2; exit 4; }
+  echo "Installing vimrc: ${VIMRC_URL} -> ${VIMRC_PATH}"
+  as_root "mkdir -p \"$(dirname "$VIMRC_PATH")\" && curl -fsSL \"$VIMRC_URL\" -o \"$VIMRC_PATH\""
+}
+
+# ---- main
+case "$METHOD" in
+  pkg)  install_pkg || { echo "Package install failed. Try --method pip" >&2; exit 1; } ;;
+  pip)  install_pip ;;
+  auto) install_pkg || install_pip ;;
+  *)    echo "ERROR: invalid --method: $METHOD" >&2; usage; exit 1 ;;
+esac
+
+have ansible || { echo "WARNING: install completed but 'ansible' not found on PATH." >&2; exit 2; }
+echo "Ansible installed: $(ansible --version | head -n 1)"
+
+install_roles_and_run_playbook_per_role
+install_vimrc
+
+exec "$SHELL" -l

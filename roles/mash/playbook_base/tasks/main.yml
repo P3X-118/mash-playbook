@@ -1,10 +1,9 @@
-# SPDX-FileCopyrightText: 2023 - 2025 Slavi Pantaleev
+# SGC-FileCopyrightText: 2026 - 2026 Oneill
 #
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
+# SGC-License-Identifier: AGPL-3.0-or-later
 ---
 
-# This needs to always run, because it populates `mash_playbook_uid` and `mash_playbook_gid`,
+# This needs to always run, because it populates `playbook_uid` and `playbook_gid`,
 # which are required by many other roles.
 - block:
     - ansible.builtin.include_tasks: "{{ role_path }}/tasks/setup_user.yml"

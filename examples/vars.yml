@@ -16,7 +16,7 @@
 
 # Put a strong secret below, generated with `pwgen -s 64 1` or in another way
 # Various other secrets will be derived from this secret automatically.
-mash_playbook_generic_secret_key: ''
+sgc_pgsk: ''
 
 ########################################################################
 #                                                                      #
@@ -96,7 +96,7 @@ devture_timesync_installation_enabled: true
 # If your server already runs Traefik, you will run into port conflicts by installing it twice.
 # See docs/interoperability.md for solutions.
 
-mash_playbook_reverse_proxy_type: playbook-managed-traefik
+rev_proxy_type: playbook-managed-traefik
 
 ########################################################################
 #                                                                      #

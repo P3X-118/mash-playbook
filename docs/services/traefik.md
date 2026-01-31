@@ -26,7 +26,7 @@ To enable this service, add the following configuration to your `vars.yml` file 
 #                                                                      #
 ########################################################################
 
-mash_playbook_reverse_proxy_type: playbook-managed-traefik
+rev_proxy_type: playbook-managed-traefik
 
 ########################################################################
 #                                                                      #
@@ -50,7 +50,7 @@ To tell the playbook that you're running a Traefik instance and you'd still like
 ```yml
 # Tell the playbook you're using Traefik installed in another way.
 # It won't bother installing Traefik.
-mash_playbook_reverse_proxy_type: other-traefik-container
+rev_proxy_type: other-traefik-container
 
 # Tell the playbook to attach services which require reverse-proxying to an additional network by default (e.g. traefik)
 # This needs to match your Traefik network.

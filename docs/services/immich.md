@@ -99,7 +99,7 @@ We recommend the following `vars.yml` (e.g. `inventory/host_vars/example.com-imm
 ########################################################################
 
 # Put a strong secret below, generated with `pwgen -s 64 1` or in another way
-mash_playbook_generic_secret_key: ""
+sgc_pgsk: ""
 
 # Override service names and directory path prefixes
 mash_playbook_service_identifier_prefix: 'mash-immich-'
