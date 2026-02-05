@@ -583,10 +583,10 @@
   version: 8630e4f1749bcb659c412820f754473f09055052
   name: playbook_help
   activation_prefix: ""
-#- src: git+https://github.com/devture/com.devture.ansible.role.playbook_runtime_messages.git
-#  version: 9b4b088c62b528b73a9a7c93d3109b091dd42ec6
-#  name: playbook_runtime_messages
-#  activation_prefix: ""
+- src: git+https://github.com/P3X-118/playbook_runtime_messages-ar.git
+  version: v1.0.0
+  name: playbook_runtime_messages
+  activation_prefix: ""
 - src: git+https://github.com/P3X-118/playbook_state_preserver-ar.git
   version: 1.0.0
   name: playbook_state_preserver
