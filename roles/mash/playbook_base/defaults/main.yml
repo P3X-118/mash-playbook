@@ -14,7 +14,7 @@ sgc_user_system: true
 sgc_user_shell: /sbin/nologin
 
 sgc_playbook_group_name: "{{ sgc_playbook_identifier }}"
-mash_playbook_group_system: true
+sgc_group_system: true
 
 # By default, the playbook creates the user (`sgc_playbook_user`)
 # and group (`sgc_playbook_group_name`) with a random id.
