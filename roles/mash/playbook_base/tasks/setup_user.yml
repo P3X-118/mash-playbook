@@ -11,7 +11,7 @@
         name: "{{ sgc_playbook_group_name }}"
         gid: "{{ omit if sgc_playbook_gid is none else sgc_playbook_gid }}"
         state: present
-        system: "{{ playbook_group_system }}"
+        system: "{{ sgc_group_system }}"
       register: sgc_base_group_result
 
     - name: Ensure user is created
@@ -22,8 +22,8 @@
         group: "{{ sgc_playbook_group_name }}"
         home: "{{ sgc_playbook_user_home }}"
         create_home: false
-        system: "{{ playbook_user_system }}"
-        shell: "{{ playbook_user_shell }}"
+        system: "{{ sgc_user_system }}"
+        shell: "{{ sgc_user_shell }}"
       register: sgc_base_user_result
 
     - name: Initialize sgc_playbook_uid and sgc_playbook_gid
