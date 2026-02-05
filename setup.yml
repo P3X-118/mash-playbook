@@ -574,11 +574,11 @@
     # /role-specific:notfellchen
 
     # role-specific:ntfy
-    - role: galaxy/ntfy
+    #- role: galaxy/ntfy
     # /role-specific:ntfy
 
     # role-specific:oauth2_proxy
-    - role: galaxy/oauth2_proxy
+    #- role: galaxy/oauth2_proxy
     # /role-specific:oauth2_proxy
 
     # role-specific:onlyoffice_docs
@@ -913,7 +913,7 @@
 
     # role-specific:systemd_service_manager
     # This role needs to run after setting up roles for individual services as it restarts them.
-    - when: devture_systemd_service_manager_enabled | bool
+    - when: systemd_service_manager_enabled | bool
       role: galaxy/systemd_service_manager
     # /role-specific:systemd_service_manager
 
