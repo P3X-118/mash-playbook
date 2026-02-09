@@ -11,10 +11,13 @@
 .DS_Store
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #/requirements.yml
 #/setup.yml
 #/group_vars/mash_servers
 =======
+=======
+>>>>>>> Stashed changes
 /group_vars/mash_servers
 >>>>>>> Stashed changes
 
