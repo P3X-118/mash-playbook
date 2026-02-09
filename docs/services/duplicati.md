@@ -109,7 +109,7 @@ To set the default options, open `https://duplicati.example.com/ngax/index.html#
 ```txt
 --send-mail-from=noreply@mash.example.com
 --send-mail-to=RECIPIENT_ADDRESS_HERE
---send-mail-url=smtp://mash-exim-relay:8025
+--send-mail-url=smtp://sgc-exim-relay:8025
 --send-mail-level=Warning,Error
 ```
 

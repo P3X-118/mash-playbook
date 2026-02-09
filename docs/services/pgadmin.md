@@ -75,7 +75,7 @@ To get started, open the URL with a web browser to log in to the instance with t
 
 To connect to the Postgres server which you manage with this playbook, you need to register it on the UI. Refer to [this page](https://www.pgadmin.org/docs/pgadmin4/latest/connecting.html) on the documentation for details.
 
-To register it, set `mash-postgres` to the `Host name/address` input field on the modal window for the registration. The default username is `root`, and its password is the one specified to `postgres_connection_password` on your `vars.yml` file.
+To register it, set `sgc-postgres` to the `Host name/address` input field on the modal window for the registration. The default username is `root`, and its password is the one specified to `postgres_connection_password` on your `vars.yml` file.
 
 [<img src="../assets/pgadmin/register.webp" title="Modal window for database server registration" width="600" alt="Modal window for database server registration">](../assets/pgadmin/register.webp)
 

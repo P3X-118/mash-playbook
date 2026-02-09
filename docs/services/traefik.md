@@ -26,7 +26,7 @@ To enable this service, add the following configuration to your `vars.yml` file 
 #                                                                      #
 ########################################################################
 
-mash_playbook_reverse_proxy_type: playbook-managed-traefik
+rev_proxy_type: playbook-managed-traefik
 
 ########################################################################
 #                                                                      #
@@ -50,19 +50,19 @@ To tell the playbook that you're running a Traefik instance and you'd still like
 ```yml
 # Tell the playbook you're using Traefik installed in another way.
 # It won't bother installing Traefik.
-mash_playbook_reverse_proxy_type: other-traefik-container
+rev_proxy_type: other-traefik-container
 
 # Tell the playbook to attach services which require reverse-proxying to an additional network by default (e.g. traefik)
 # This needs to match your Traefik network.
-mash_playbook_reverse_proxyable_services_additional_network: traefik
+revproxy_service_networks: traefik
 
 # Uncomment and adjust the variables below if you'd like to enable HTTP-compression.
 #
 # For this to work, you will need to define a compress middleware (https://doc.traefik.io/traefik/middlewares/http/compress/) for your Traefik instance
 # using a file (https://doc.traefik.io/traefik/providers/file/) or Docker (https://doc.traefik.io/traefik/providers/docker/) configuration provider.
 #
-# mash_playbook_reverse_proxy_traefik_middleware_compession_enabled: true
-# mash_playbook_reverse_proxy_traefik_middleware_compession_name: my-compression-middleware@file
+# revprox_middleout_compression_enabled: true
+# revproxy_middleout_compression_name: my-compression-middleware@file
 ```
 
 ## Increase logging verbosity

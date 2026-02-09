@@ -91,8 +91,8 @@ We recommend that you make use of the [aux](auxiliary.md) role to create some sh
 ########################################################################
 
 aux_directory_definitions:
-  - dest: "{{ mash_playbook_base_path }}/storage"
-  - dest: "{{ mash_playbook_base_path }}/storage/books"
+  - dest: "{{ sgc_playbook_base_path }}/storage"
+  - dest: "{{ sgc_playbook_base_path }}/storage/books"
 
 ########################################################################
 #                                                                      #
@@ -101,7 +101,7 @@ aux_directory_definitions:
 ########################################################################
 ```
 
-You can then mount this `{{ mash_playbook_base_path }}/storage/books` directory on the Syncthing container and synchronize it with other computers:
+You can then mount this `{{ sgc_playbook_base_path }}/storage/books` directory on the Syncthing container and synchronize it with other computers:
 
 ```yaml
 ########################################################################
@@ -114,7 +114,7 @@ You can then mount this `{{ mash_playbook_base_path }}/storage/books` directory 
 
 syncthing_container_additional_volumes:
   - type: bind
-    src: "{{ mash_playbook_base_path }}/storage/books"
+    src: "{{ sgc_playbook_base_path }}/storage/books"
     dst: /books
 
 ########################################################################
@@ -124,7 +124,7 @@ syncthing_container_additional_volumes:
 ########################################################################
 ```
 
-Finally, mount the `{{ mash_playbook_base_path }}/storage/books` directory on the Calibre-Web container as read-only:
+Finally, mount the `{{ sgc_playbook_base_path }}/storage/books` directory on the Calibre-Web container as read-only:
 
 ```yaml
 ########################################################################
@@ -137,7 +137,7 @@ Finally, mount the `{{ mash_playbook_base_path }}/storage/books` directory on th
 
 calibre_web_container_additional_volumes:
   - type: bind
-    src: "{{ mash_playbook_base_path }}/storage/books"
+    src: "{{ sgc_playbook_base_path }}/storage/books"
     dst: /books
 
 ########################################################################
@@ -162,7 +162,7 @@ As the Calibre-Web instance does not support configuring the mailer with environ
 To set up with the default exim-relay settings, open `https://mash.example.com/calibre-web/admin/mailsettings` to add the following configuration:
 
 - **Email Account Type**: Standard Email Account
-- **SMTP Hostname**: `mash-exim-relay`
+- **SMTP Hostname**: `sgc-exim-relay`
 - **SMTP Port**: 8025
 - **Encryption**: None
 - **SMTP Login**: (Empty)

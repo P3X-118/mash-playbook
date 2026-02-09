@@ -125,11 +125,11 @@ After creating the directory, add a new `vars.yml` file inside it with a content
 ########################################################################
 
 # Put a strong secret below, generated with `pwgen -s 64 1` or in another way
-mash_playbook_generic_secret_key: RANDOM_STRING_HERE
+sgc_pgsk: RANDOM_STRING_HERE
 
 # Override service names and directory path prefixes
-mash_playbook_service_identifier_prefix: "mash-mediawiki-"
-mash_playbook_service_base_directory_name_prefix: "mediawiki-"
+service_id_prefix: "mash-mediawiki-"
+service_directory_prefix: "mediawiki-"
 
 ########################################################################
 #                                                                      #

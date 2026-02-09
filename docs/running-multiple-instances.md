@@ -68,7 +68,7 @@ First, create new directories where `vars.yml` for the supplementary hosts are s
 Then, create a new `vars.yml` file inside each of them with a content below.
 
 **Notes**:
-- As this `vars.yml` file will be used for the new host, make sure to set `mash_playbook_generic_secret_key`. It does not need to be same as the one on `vars.yml` for the main host.
+- As this `vars.yml` file will be used for the new host, make sure to set `sgc_pgsk`. It does not need to be same as the one on `vars.yml` for the main host.
 - These variables are not related to the hostname of the server. For example, even if it is `www.example.com`, you do not need to include `www` in either of them. If you are not sure which string you should set, you might as well use the values as they are.
 
 For the supplementary host for NetBox, create `inventory/host_vars/mash.example.com-netbox-deps/vars.yml` with this content.
@@ -85,11 +85,11 @@ For the supplementary host for NetBox, create `inventory/host_vars/mash.example.
 ########################################################################
 
 # Put a strong secret below, generated with `pwgen -s 64 1` or in another way
-mash_playbook_generic_secret_key: ''
+sgc_pgsk: ''
 
 # Override service names and directory path prefixes
-mash_playbook_service_identifier_prefix: 'mash-netbox-'
-mash_playbook_service_base_directory_name_prefix: 'netbox-'
+service_id_prefix: 'mash-netbox-'
+service_directory_prefix: 'netbox-'
 
 ########################################################################
 #                                                                      #
@@ -127,11 +127,11 @@ For the supplementary host for PeerTube, create `inventory/host_vars/mash.exampl
 ########################################################################
 
 # Put a strong secret below, generated with `pwgen -s 64 1` or in another way
-mash_playbook_generic_secret_key: ''
+sgc_pgsk: ''
 
 # Override service names and directory path prefixes
-mash_playbook_service_identifier_prefix: 'mash-peertube-'
-mash_playbook_service_base_directory_name_prefix: 'peertube-'
+service_id_prefix: 'mash-peertube-'
+service_directory_prefix: 'peertube-'
 
 ########################################################################
 #                                                                      #

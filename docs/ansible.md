@@ -25,7 +25,7 @@ We're not sure what's the minimum version of Ansible that can run this playbook 
 If your distro ships with an Ansible version older than this, you may run into issues. Consider [Upgrading Ansible](#upgrading-ansible) or [using Ansible via Docker](#using-ansible-via-docker).
 
 > [!WARNING]
-> One reason for the version requirement being as such is that the playbook by default installs Docker for you using [this Docker role](https://github.com/geerlingguy/ansible-role-docker) which [has a hard requirement on Ansible v2.15.1](https://github.com/geerlingguy/ansible-role-docker/commit/7f44a1d9ad8132819ea9852918bca5dab8757cd0). If you install Docker yourself another way, you can tell the playbook to skip running this role (by adding `mash_playbook_docker_installation_enabled: false` to your `vars.yml` configuration). It may then be possible to get the playbook running on an older version of Ansible. Still, this is a complication and your mileage may vary. We recommend [upgrading Ansible](#upgrading-ansible) instead of going into uncharted territory.
+> One reason for the version requirement being as such is that the playbook by default installs Docker for you using [this Docker role](https://github.com/geerlingguy/ansible-role-docker) which [has a hard requirement on Ansible v2.15.1](https://github.com/geerlingguy/ansible-role-docker/commit/7f44a1d9ad8132819ea9852918bca5dab8757cd0). If you install Docker yourself another way, you can tell the playbook to skip running this role (by adding `sgc_docker_install: false` to your `vars.yml` configuration). It may then be possible to get the playbook running on an older version of Ansible. Still, this is a complication and your mileage may vary. We recommend [upgrading Ansible](#upgrading-ansible) instead of going into uncharted territory.
 
 ## Upgrading Ansible
 
@@ -54,7 +54,7 @@ You can either [run Ansible in a container on the server itself](#running-ansibl
 
 To run Ansible in a (Docker) container on the server itself, you need to have a working Docker installation. Docker is normally installed by the playbook, so this may be a bit of a chicken and egg problem. To solve it:
 
-- you **either** need to install [Docker](services/ansible.md) manually first. Follow [the upstream instructions](https://docs.docker.com/engine/install/) for your distribution and consider setting `mash_playbook_docker_installation_enabled: false` in your `vars.yml` file, to prevent the playbook from installing Docker
+- you **either** need to install [Docker](services/ansible.md) manually first. Follow [the upstream instructions](https://docs.docker.com/engine/install/) for your distribution and consider setting `sgc_docker_install: false` in your `vars.yml` file, to prevent the playbook from installing Docker
 - **or** you need to run the playbook in another way (e.g. [Running Ansible in a container on another computer (not the server)](#running-ansible-in-a-container-on-another-computer-not-the-server)) at least the first time around
 
 Once you have a working Docker installation on the server, **clone the playbook** somewhere on the server and configure it as per usual (`inventory/hosts`, `inventory/host_vars/…`, etc.), as described in [configuring the playbook](configuring-playbook.md).

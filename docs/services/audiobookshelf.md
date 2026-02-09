@@ -73,8 +73,8 @@ We recommend that you make use of the [aux](auxiliary.md) role to create some sh
 ########################################################################
 
 aux_directory_definitions:
-  - dest: "{{ mash_playbook_base_path }}/storage"
-  - dest: "{{ mash_playbook_base_path }}/storage/audiobookshelf"
+  - dest: "{{ sgc_playbook_base_path }}/storage"
+  - dest: "{{ sgc_playbook_base_path }}/storage/audiobookshelf"
 
 ########################################################################
 #                                                                      #
@@ -83,7 +83,7 @@ aux_directory_definitions:
 ########################################################################
 ```
 
-You can then mount this `{{ mash_playbook_base_path }}/storage/audiobookshelf` directory into the Syncthing container and synchronize it with some other computer:
+You can then mount this `{{ sgc_playbook_base_path }}/storage/audiobookshelf` directory into the Syncthing container and synchronize it with some other computer:
 
 ```yaml
 ########################################################################
@@ -96,7 +96,7 @@ You can then mount this `{{ mash_playbook_base_path }}/storage/audiobookshelf` d
 
 syncthing_container_additional_volumes:
   - type: bind
-    src: "{{ mash_playbook_base_path }}/storage/audiobookshelf"
+    src: "{{ sgc_playbook_base_path }}/storage/audiobookshelf"
     dst: /audiobookshelf
 
 ########################################################################
@@ -106,7 +106,7 @@ syncthing_container_additional_volumes:
 ########################################################################
 ```
 
-Finally, mount the `{{ mash_playbook_base_path }}/storage/audiobookshelf` directory into the audiobookshelf container as read-only:
+Finally, mount the `{{ sgc_playbook_base_path }}/storage/audiobookshelf` directory into the audiobookshelf container as read-only:
 
 ```yaml
 ########################################################################
@@ -119,7 +119,7 @@ Finally, mount the `{{ mash_playbook_base_path }}/storage/audiobookshelf` direct
 
 audiobookshelf_container_additional_volumes:
   - type: bind
-    src: "{{ mash_playbook_base_path }}/storage/audiobookshelf"
+    src: "{{ sgc_playbook_base_path }}/storage/audiobookshelf"
     dst: /audiobookshelf
     options: readonly
 
@@ -152,7 +152,7 @@ As the audiobookshelf instance does not support configuring the mailer with envi
 
 To set up with the default exim-relay settings, open `https://audiobookshelf.example.com/audiobookshelf/config/email` to add the following configuration:
 
-- **Host**: `mash-exim-relay`
+- **Host**: `sgc-exim-relay`
 - **Port**: 8025
 - **Secure**: (off)
 - **Reject unauthorized certificates**: (off)

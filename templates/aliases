@@ -1,0 +1,369 @@
+#!/usr/bin/env bash
+# Make sure to add -e if being run by packer
+#******************** 
+# Easier Navigations
+#********************
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+c(){
+  cd $@
+}
+
+alias pu='pushd'
+alias pd='popd'
+
+##########################
+# Admin Edits
+#############################
+alias v='vim'
+alias va='vi ~/.aliases'
+alias vc='sudo vi /etc/caddyCaddyfile'
+alias vsh='vi ~/.ssh/config'
+alias vsah='vi ~/.ansible/hosts'
+
+alias cp="cp -iv"
+alias mv="mv -iv"
+
+##############################
+# Admin Tools
+###############################
+# Remote access to area 51
+alias reboot="sudo shutdown -r now"
+# Python VirtualEnv Activate
+alias act="source env/bin/activate"
+alias grep='grep -i --color=auto'
+alias chucknorris='sudo'
+# Recursively delete '.DS_Store' files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+# Human Readable Filesize Information for current directory
+alias d="du -hd"
+
+# Password generator that takes 1 argument. 
+pgen(){
+  openssl rand -base64 48 | cut -c1-$@ | xclip -selection clipboard
+}
+
+# Reload the shell
+alias shell="exec $SHELL -l"
+
+# Get current IP
+alias cip="curl ip.sgc.ai"
+
+# Parse systemd configs for any string
+sysd() {
+  sudo grep -R $@ /etc/systemd /usr/lib/systemd /lib/systemd 2>/dev/null
+}
+
+# Get week number
+alias week='date +%V'
+
+# Historical Shortcut
+alias h="history"
+
+# Search history for X
+hg(){
+  history|grep $@
+}
+
+# Extracts Most Everything
+extract () {
+	if [ -f $1 ] ; then
+  	case $1 in
+     *.tar.bz2)   tar xjf $1     ;;
+     *.tar.gz)    tar xzf $1     ;;
+     *.bz2)       bunzip2 $1     ;;
+     *.rar)       unrar e $1     ;;
+     *.gz)        gunzip $1      ;;
+     *.tar)       tar xf $1      ;;
+     *.tbz2)      tar xjf $1     ;;
+     *.tgz)       tar xzf $1     ;;
+     *.zip)       unzip $1       ;;
+     *.Z)         uncompress $1  ;;
+     *.7z)        7z x $1        ;;
+     *)     echo "'$1' cannot be extracted via extract()" ;;
+      esac
+  else
+      echo "'$1' is not a valid file"
+  fi
+}
+
+# Lazy Tree
+t(){
+  if [ $# -eq 0 ]
+    then
+      tree
+    else
+      tree -L $@
+ fi
+}
+
+# All Seeing List Eye
+# Colors
+alias ls='CLICOLOR_FORCE=1 ls -F'
+# List Long Show Hidden
+alias ll='ls -FllAhp'
+# List Long Ignore Hidden
+alias l='ls -FLlhp'
+# List by Size
+alias lS='ls -FlAhtpS'
+# List by Last Modified
+alias lm='ls -FlAhtp'
+# Show symlinks and classify executables vs directories
+alias lc='ls -FlAhtU'
+
+##################################
+# Chrome
+#****************************
+# Kill all chrome tabs 
+alias chred="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+#********************
+# Kubernetes
+#********************
+# KubeSeaTeaElle
+alias k="kubectl"
+
+# Use this strat to vary kube configs
+#alias k2="kubectl --kubeconfig ~/.kube/two"
+
+# I can't even remember what kubectx is
+alias kt="kubectx"
+
+# Get all the pods for all namespaces
+alias kpa="kubectl get pods -o wide -A"
+
+# Get Deployments
+kgd(){
+  kubectl get deployments -A
+}
+
+# Delete Deployment: kdd <deployment> <namespace>
+kdd(){
+  kubectl delete deployment $1 -n $2
+}
+
+# Get All Nodes
+kgn(){
+  kubectl get nodes -o wide -A
+}
+
+# Get All Ingress 
+kgi(){
+  kubectl get ingress -o wide -A
+}
+
+# Get All Pods
+kps(){
+  kubectl get pods -o wide -A
+}
+
+
+# Kubectl Get Secrets
+kgs(){
+# if you don't declare a namespace, it uses -A
+  if [ -n "$1" ]; then
+    input="-n $1"
+  else
+    input=-A
+  fi
+  kubectl get secrets $input
+  #input=${1:--A}
+}
+
+# Delete Secrets: kds <secret> <namespace>
+kds(){
+  kubectl delete secrets $1 -n $2
+}
+
+## !!! NUCLEAR !!! ###
+kdds(){
+# IF YOU DO NOT declare a namespace, it uses -A
+  if [ -n "$1" ]; then
+    input="-n $1"
+  else
+    echo "you forgot a namespace"
+  fi
+  #secs="kgs $1 | awk 'NR>1 {print $1}'"
+  "kubectl delete secrets $(kgs $1 | awk 'NR>1 {print $1}') -n $1"
+  $kskill
+  #kubectl delete secrets $input
+  #input=${1:--A}
+}
+
+# Get All Services
+ksrv(){
+  kubectl get services -A
+}
+
+
+
+
+#********************
+# Molecule
+#********************
+alias mc="molecule converge"
+alias m="molecule"
+# Molecule Init function
+minit(){
+  time molecule init role $@ --driver-name docker
+}
+alias mdomb="m destroy"
+alias tf="terraform"
+alias mk="minikube"
+
+
+#********************
+# Docker
+#********************
+# Apps
+alias sfile="docker-compose -f /home/oneill/WorkBench/sfile.yml up -d"
+# Get Active Containers
+alias dps="docker ps"
+dps1(){
+  docker ps | awk 'NR==2 {print $1}' | xclip -selection clipboard
+}
+alias dpsa="docker ps -a"
+alias dpsq="docker ps -qa"
+
+alias dc="docker-compose $@"
+
+#Get Images
+alias dim="docker images"
+# Get Volumes
+alias dvo="docker volume list"
+
+# Get Container Network Info
+dip(){
+  docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $@
+}
+
+# Enter Docker Interactive Mode with Bash
+dex(){
+  docker exec -it $@ /bin/bash
+}
+
+dru(){
+  docker run -it $@ /bin/bash
+}
+
+drun(){
+  docker run -dt $@ /bin/bash
+}
+
+# Kill Running Containers
+alias dkil="docker kill $@"
+alias dkill="docker kill $(docker ps -q)"
+
+dsweep(){
+  docker kill $(docker ps -q)
+  wait
+  docker rm $(docker ps -qa)
+}
+
+dclean(){
+  docker kill $(docker ps -q)
+  wait
+  docker rm -f $(docker ps -qa)
+  wait
+  docker rmi -f $(docker images -qa)
+  wait
+  docker network prune
+}
+
+dnuke() {
+  docker volume rm $(docker volume ls -q)
+}
+
+drm() { 
+  docker volume rm $@
+}
+
+
+##############################
+# Ansible
+##############################
+alias a="ansible"
+# Ansible module
+alias am="ansible -m"
+# Ping
+alias amp="ansible -m ping"
+# Ansible Playbook
+alias ap="ansible-playbook"
+# Sync Time
+alias tim='ansible d10 -b -m service -a "name=systemd-timesyncd state=restarted"'
+
+# Get remote free memory 
+mem(){
+  ansible $@ -a "uname -a"
+}
+# Get remote kernel 
+kern(){
+  ansible $@ -a "uname -a"
+}
+# Gather all facts
+setup(){
+  ansible $@ -m setup
+}
+
+# Yum Update
+ayum(){
+  ansible $1 -b -m yum -a "name=$2 state=present"
+}
+#DNF Install
+adnf(){
+  ansible $1 -b -m dnf -a "name=$2 state=present"
+}
+# Apt Install
+aapt(){
+  ansible $1 -b -m apt -a "name=$2 state=present" -K
+}
+# Get OS
+aos(){
+  ansible -m setup $@ -a "filter=ansible_distribution"
+}
+
+# Ansible Galaxy Install Requirements
+alias ag='ansible-galaxy install -r requirements.yml -p roles'
+alias agl='ansible-galaxy collection list'
+
+
+##################################
+# Gitter Done
+##################################
+# List remote branches
+alias grb="git -r branch"
+# 
+alias gru="git remote add upstream $1" 
+# Fetch Upstream
+alias grf="git remote fetch upstream"
+
+# Push a new local branch that has no current upstream branch
+gup(){
+  git push --set-upstream origin $(git branch --show-current)
+}
+
+alias gs="git status"
+alias gpa="git push --all"
+alias gb="git branch"
+alias gcb="git checkout -b"
+alias gc="git checkout"
+
+
+######################
+# Port Jutsu
+####################
+# Get everything currently connected to the machine
+alias esp="ss -tn | awk 'NR>1 {print $5}' | sort | uniq"
+
+alias lsp="sudo lsof -i -n -P | grep LISTEN"
+
+
+####################
+# AWS CLI
+##############
+#Route53
+alias ar5="aws route53"
+
+#Recon
+#alias dnsdump="/home/oneill/Documents/Dave/RECON/dnsdumpster/dnsdumpster.py -d $@"

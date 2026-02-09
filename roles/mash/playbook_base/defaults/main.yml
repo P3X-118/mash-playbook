@@ -1,48 +1,46 @@
-# SPDX-FileCopyrightText: 2023 - 2025 Slavi Pantaleev
+# SGC-FileCopyrightText: 2026 - 2026 Oneill
 #
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SGC-License-Identifier: AGPL-3.0-or-later
 
 ---
 
 # Controls the identifier for this MASH stack.
 # This affects user/groups, systemd service names, container names, container networks, base installation path, etc.
-mash_playbook_identifier: mash
+sgc_playbook_identifier: sgc
 
-mash_playbook_user_name: "{{ mash_playbook_identifier }}"
-mash_playbook_user_home: "{{ mash_playbook_base_path }}"
-mash_playbook_user_system: true
-mash_playbook_user_shell: /sbin/nologin
+sgc_playbook_user: "{{ sgc_playbook_identifier }}"
+sgc_playbook_user_home: "{{ sgc_playbook_base_path }}"
+sgc_user_system: true
+sgc_user_shell: /sbin/nologin
 
-mash_playbook_group_name: "{{ mash_playbook_identifier }}"
-mash_playbook_group_system: true
+sgc_playbook_group_name: "{{ sgc_playbook_identifier }}"
+sgc_group_system: true
 
-# By default, the playbook creates the user (`mash_playbook_user_name`)
-# and group (`mash_playbook_group_name`) with a random id.
+# By default, the playbook creates the user (`sgc_playbook_user`)
+# and group (`sgc_playbook_group_name`) with a random id.
 # To use a specific user/group id, override these variables.
-mash_playbook_uid: ~
-mash_playbook_gid: ~
+sgc_playbook_uid: ~
+sgc_playbook_gid: ~
 
 # A secret used as a base, for generating various other secrets.
 # You can put any string here, but generating a strong one is preferred (e.g. `pwgen -s 64 1`).
-mash_playbook_generic_secret_key: ''
+sgc_pgsk: ''
 
 # Controls the prefix used for all service identifiers.
 # This affects systemd service names, container names, container networks, etc.
-mash_playbook_service_identifier_prefix: "{{ mash_playbook_identifier }}-"
+sgc_service_id_prefix: "{{ sgc_playbook_identifier }}-"
 
 # Controls the prefix of the base directory for all services.
 # Example: `/mash/{PREFIX}traefik`.
-# If `mash_playbook_identifier` is the default (mash), we intentionally use an empty prefix.
-mash_playbook_service_base_directory_name_prefix: "{{ '' if mash_playbook_identifier == 'mash' else (mash_playbook_identifier + '-') }}"
+# If `sgc_playbook_identifier` is the default (mash), we intentionally use an empty prefix.
+sgc_service_basedir_prefix: "{{ '' if sgc_playbook_identifier == 'mash' else (sgc_playbook_identifier + '-') }}"
 
 # Controls the base path where all services will be installed
-mash_playbook_base_path: "/{{ mash_playbook_identifier }}"
-mash_playbook_base_path_mode: "750"
+sgc_playbook_base_path: "/{{ sgc_playbook_identifier }}"
+sgc_playbook_base_path_mode: "750"
 
-# The architecture that your server runs.
-# Recognized values by us are 'amd64', 'arm32' and 'arm64'.
-# Not all architectures support all services, so your experience (on non-amd64) may vary.
-mash_playbook_architecture: "{{ 'amd64' if ansible_facts.architecture == 'x86_64' else ('arm64' if ansible_facts.architecture == 'aarch64' else ('arm32' if ansible_facts.architecture.startswith('armv') else '')) }}"
+# The architecture that your server runs.# Recognized values: 'amd64', 'arm32' and 'arm64'.
+system_architecture: "{{ 'amd64' if ansible_facts.architecture == 'x86_64' else ('arm64' if ansible_facts.architecture == 'aarch64' else ('arm32' if ansible_facts.architecture.startswith('armv') else '')) }}"
 
 # Specifies the type of reverse-proxy used by the playbook.
 #
@@ -59,19 +57,19 @@ mash_playbook_architecture: "{{ 'amd64' if ansible_facts.architecture == 'x86_64
 #     - this playbook will not install Traefik
 #     - nevertheless, the playbook expects that you would install Traefik yourself via other means
 #     - you should make sure your Traefik configuration is compatible with what the playbook would have configured (web, web-secure entrypoints, etc.)
-#     - you need to set `mash_playbook_reverse_proxyable_services_additional_network` to the name of your Traefik network
+#     - you need to set `revproxy_service_networks` to the name of your Traefik network
 #
 # - `none`
 #     - no reverse-proxy will be installed
 #     - no port exposure will be done for any of the container services
 #     - it's up to you to expose the ports you want, etc.
-mash_playbook_reverse_proxy_type: none
+rev_proxy_type: none
 
-# Controls whether to install Docker or not
+# Controls whether to install Docker or not. NOTE: This is an opinionated docker installation. 
 # Also see `devture_docker_sdk_for_python_installation_enabled`.
-mash_playbook_docker_installation_enabled: false
+sgc_docker_install: false
 
-mash_playbook_docker_installation_daemon_options: "{{ mash_playbook_docker_installation_daemon_options_auto | combine(mash_playbook_docker_installation_daemon_options_custom, recursive=True) }}"
+docker_daemon_install_options: "{{ docker_daemon_install_options_auto | combine(docker_daemon_install_options_custom, recursive=True) }}"
 
 # Since Docker 27.0.1, Docker daemon options do not need to be changed to enable IPv6 support on the daemon side.
 # See: https://docs.docker.com/engine/release-notes/27/#ipv6
@@ -81,35 +79,35 @@ mash_playbook_docker_installation_daemon_options: "{{ mash_playbook_docker_insta
 # networks need to be created with IPv6 explicitly enabled.
 # This is controlled by the `devture_systemd_docker_base_ipv6_enabled` variable and it's up to the various roles to
 # respect this variable when creating their networks.
-mash_playbook_docker_installation_daemon_options_auto: |
+docker_daemon_install_options_auto: |
   {{
     ({'experimental': true, 'ip6tables': true} if devture_systemd_docker_base_ipv6_daemon_options_changing_enabled else {})
   }}
 
-mash_playbook_docker_installation_daemon_options_custom: {}
+docker_daemon_install_options_custom: {}
 
-mash_playbook_docker_installation_daemon_options_file_path: /etc/docker/daemon.json
+docker_daemon_install_options_file_path: /etc/docker/daemon.json
 
 # Controls whether to attach Traefik labels to services.
 # This is separate from `traefik_enabled`, because you may wish to disable Traefik installation by the playbook,
 # yet still use Traefik installed in another way.
-mash_playbook_traefik_labels_enabled: "{{ mash_playbook_reverse_proxy_type in ['playbook-managed-traefik', 'other-traefik-container'] }}"
+traefik_labels_enabled: "{{ rev_proxy_type in ['playbook-managed-traefik', 'other-traefik-container'] }}"
 
-# Specifies whether the Traefik reverse-proxy (if `mash_playbook_reverse_proxy_type` indicates that Traefik is being used) defines a compression middleware.
-mash_playbook_reverse_proxy_traefik_middleware_compession_enabled: "{{ traefik_config_http_middlewares_compression_enabled if (traefik_enabled and traefik_config_http_middlewares_compression_enabled) else false }}"
+# Specifies whether the Traefik reverse-proxy (if `rev_proxy_type` indicates that Traefik is being used) defines a compression middleware.
+revprox_middleout_compression_enabled: "{{ traefik_config_http_middlewares_compression_enabled if (traefik_enabled and traefik_config_http_middlewares_compression_enabled) else false }}"
 
-# Specifies the name of the compression middleware defined for the Traefik reverse-proxy (if `mash_playbook_reverse_proxy_type` indicates that Traefik is being used).
+# Specifies the name of the compression middleware defined for the Traefik reverse-proxy (if `rev_proxy_type` indicates that Traefik is being used).
 # It's better to use a fully-qualified middleware name (e.g. `compression@docker` or `compression@file`) here to prevent ambiguity.
-mash_playbook_reverse_proxy_traefik_middleware_compession_name: "{{ (traefik_config_http_middlewares_compression_middleware_name + '@file') if traefik_enabled else '' }}"
+revproxy_middleout_compression_name: "{{ (traefik_config_http_middlewares_compression_middleware_name + '@file') if traefik_enabled else '' }}"
 
 # Controls the additional network that reverse-proxyable services will be connected to.
-mash_playbook_reverse_proxyable_services_additional_network: "{{ traefik_container_network if traefik_enabled | default(false) else '' }}"
+revproxy_service_networks: "{{ traefik_container_network if traefik_enabled | default(false) else '' }}"
 
 # Controls whether various services should expose metrics publicly.
 # If Prometheus is operating on the same machine, exposing metrics publicly is not necessary.
-mash_playbook_metrics_exposure_enabled: false
-mash_playbook_metrics_exposure_hostname: ''
-mash_playbook_metrics_exposure_path_prefix: /metrics
-mash_playbook_metrics_exposure_http_basic_auth_enabled: false
+expose_metrics_hostname_enabled: false
+expose_metrics_hostname: ''
+metrics_path_prefix: /metrics
+metrics_http_basic_auth_enabled: false
 # See https://doc.traefik.io/traefik/middlewares/http/basicauth/#users
-mash_playbook_metrics_exposure_http_basic_auth_users: ''
+metrics_http_basic_auth_users: ''

@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 As stated in the [Prerequisites](prerequisites.md), currently only `amd64` (`x86_64`) is fully supported.
 
-The playbook automatically determines the target server's architecture (the `mash_playbook_architecture` variable) to be one of the following:
+The playbook automatically determines the target server's architecture (the `host_architecture` variable) to be one of the following:
 
 - `amd64` (`x86_64`)
 - `arm32`

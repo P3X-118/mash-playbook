@@ -5,7 +5,7 @@
 ---
 
 # ansible-role-docker creates the Docker daemon options file (`/etc/docker/daemon.json`) when options are set
-# via `mash_playbook_docker_installation_daemon_options` (which influences the `docker_daemon_options` variable of the role).
+# via `docker_daemon_options` (which influences the `docker_daemon_options` variable of the role).
 # See: https://github.com/geerlingguy/ansible-role-docker/blob/acade8d01f11bcd5efecba6d8211138d7567ce4b/tasks/main.yml#L53-L66
 #
 # However, it doesn't delete the file when the options list is empty.
@@ -18,8 +18,8 @@
 # Ideally, this task would be part of the `ansible-role-docker` role, but it's not (yet).
 # See: https://github.com/geerlingguy/ansible-role-docker/pull/498
 - name: Ensure the Docker daemon options file is deleted when no longer needed
-  when: mash_playbook_docker_installation_daemon_options.keys() | length == 0
+  when: docker_daemon_options.keys() | length == 0
   ansible.builtin.file:
-    path: "{{ mash_playbook_docker_installation_daemon_options_file_path }}"
+    path: "{{ docker_daemon_options_file_path }}"
     state: absent
   notify: restart docker

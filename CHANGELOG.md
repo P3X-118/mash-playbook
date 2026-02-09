@@ -256,7 +256,7 @@ If you're only running PeerTube on a dedicated server (no other services that ma
 
 ## (Backward Compatibility Break) Docker no longer installed by default
 
-The playbook used to install Docker and the Docker SDK for Python by default, unless you turned these off by setting `mash_playbook_docker_installation_enabled` and `devture_docker_sdk_for_python_installation_enabled` (respectively) to `false`.
+The playbook used to install Docker and the Docker SDK for Python by default, unless you turned these off by setting `sgc_docker_install` and `devture_docker_sdk_for_python_installation_enabled` (respectively) to `false`.
 
 From now on, both of these variables default to `false`. An empty inventory file will not install these components.
 
@@ -271,7 +271,7 @@ To enable these components, you need to explicitly add something like this to yo
 #                                                                      #
 ########################################################################
 
-mash_playbook_docker_installation_enabled: true
+sgc_docker_install: true
 
 devture_docker_sdk_for_python_installation_enabled: true
 

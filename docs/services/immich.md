@@ -99,11 +99,11 @@ We recommend the following `vars.yml` (e.g. `inventory/host_vars/example.com-imm
 ########################################################################
 
 # Put a strong secret below, generated with `pwgen -s 64 1` or in another way
-mash_playbook_generic_secret_key: ""
+sgc_pgsk: ""
 
 # Override service names and directory path prefixes
-mash_playbook_service_identifier_prefix: 'mash-immich-'
-mash_playbook_service_base_directory_name_prefix: 'immich-'
+service_id_prefix: 'mash-immich-'
+service_directory_prefix: 'immich-'
 
 ########################################################################
 #                                                                      #
@@ -557,7 +557,7 @@ You need to go to **Administration** settings / **Settings** (a URL of `/admin/s
 
 - **Enable email notifications** = enabled
 
-- **Host**: point to your SMTP host or to `exim-relay`'s container name (e.g. `mash-exim-relay`) if using [exim-relay](exim-relay.md)
+- **Host**: point to your SMTP host or to `exim-relay`'s container name (e.g. `sgc-exim-relay`) if using [exim-relay](exim-relay.md)
 
 - **Port**: point to your SMTP port or to `exim-relay`'s container port (e.g. `8025`) if using [exim-relay](exim-relay.md)
 

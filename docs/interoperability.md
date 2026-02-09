@@ -29,7 +29,7 @@ If you are using the [matrix-docker-ansible-deploy](https://github.com/spantalee
 
 ## Disabling Docker installation
 
-If you're installing [Docker](https://www.docker.com/) on your server in another way, remove the variable `mash_playbook_docker_installation_enabled` from your `vars.yml`.
+If you're installing [Docker](https://www.docker.com/) on your server in another way, remove the variable `sgc_docker_install` from your `vars.yml`.
 
 ## Disabling timesyncing (systemd-timesyncd / ntp) installation
 

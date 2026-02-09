@@ -1,32 +1,32 @@
-# SPDX-FileCopyrightText: 2023 - 2025 Slavi Pantaleev
+# SGC-FileCopyrightText: 2026 - 2026 Oneill
 #
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SGC-License-Identifier: AGPL-3.0-or-later
 
 ---
 
-- when: not mash_playbook_uid and not mash_playbook_uid
+- when: not sgc_playbook_uid and not sgc_playbook_uid
   block:
-    - name: Ensure mash group is created
+    - name: Ensure group is created
       ansible.builtin.group:
-        name: "{{ mash_playbook_group_name }}"
-        gid: "{{ omit if mash_playbook_gid is none else mash_playbook_gid }}"
+        name: "{{ sgc_playbook_group_name }}"
+        gid: "{{ omit if sgc_playbook_gid is none else sgc_playbook_gid }}"
         state: present
-        system: "{{ mash_playbook_group_system }}"
-      register: mash_base_group_result
+        system: "{{ sgc_group_system }}"
+      register: sgc_base_group_result
 
-    - name: Ensure mash user is created
+    - name: Ensure user is created
       ansible.builtin.user:
-        name: "{{ mash_playbook_user_name }}"
-        uid: "{{ omit if mash_playbook_uid is none else mash_playbook_uid }}"
+        name: "{{ sgc_playbook_user }}"
+        uid: "{{ omit if sgc_playbook_uid is none else sgc_playbook_uid }}"
         state: present
-        group: "{{ mash_playbook_group_name }}"
-        home: "{{ mash_playbook_user_home }}"
+        group: "{{ sgc_playbook_group_name }}"
+        home: "{{ sgc_playbook_user_home }}"
         create_home: false
-        system: "{{ mash_playbook_user_system }}"
-        shell: "{{ mash_playbook_user_shell }}"
-      register: mash_base_user_result
+        system: "{{ sgc_user_system }}"
+        shell: "{{ sgc_user_shell }}"
+      register: sgc_base_user_result
 
-    - name: Initialize mash_playbook_uid and mash_playbook_gid
+    - name: Initialize sgc_playbook_uid and sgc_playbook_gid
       ansible.builtin.set_fact:
-        mash_playbook_uid: "{{ mash_base_user_result.uid }}"
-        mash_playbook_gid: "{{ mash_base_group_result.gid }}"
+        sgc_playbook_uid: "{{ sgc_base_user_result.uid }}"
+        sgc_playbook_gid: "{{ sgc_base_group_result.gid }}"

@@ -65,8 +65,8 @@ We recommend that you make use of the [aux](auxiliary.md) role to create some sh
 ########################################################################
 
 aux_directory_definitions:
-  - dest: "{{ mash_playbook_base_path }}/storage"
-  - dest: "{{ mash_playbook_base_path }}/storage/music"
+  - dest: "{{ sgc_playbook_base_path }}/storage"
+  - dest: "{{ sgc_playbook_base_path }}/storage/music"
 
 ########################################################################
 #                                                                      #
@@ -75,7 +75,7 @@ aux_directory_definitions:
 ########################################################################
 ```
 
-You can then mount this `{{ mash_playbook_base_path }}/storage/music` directory into the Syncthing container and synchronize it with some other computer:
+You can then mount this `{{ sgc_playbook_base_path }}/storage/music` directory into the Syncthing container and synchronize it with some other computer:
 
 ```yaml
 ########################################################################
@@ -88,7 +88,7 @@ You can then mount this `{{ mash_playbook_base_path }}/storage/music` directory 
 
 syncthing_container_additional_volumes:
   - type: bind
-    src: "{{ mash_playbook_base_path }}/storage/music"
+    src: "{{ sgc_playbook_base_path }}/storage/music"
     dst: /music
 
 ########################################################################
@@ -98,7 +98,7 @@ syncthing_container_additional_volumes:
 ########################################################################
 ```
 
-Finally, mount the `{{ mash_playbook_base_path }}/storage/music` directory into the Navidrome container as read-only:
+Finally, mount the `{{ sgc_playbook_base_path }}/storage/music` directory into the Navidrome container as read-only:
 
 ```yaml
 ########################################################################
@@ -111,7 +111,7 @@ Finally, mount the `{{ mash_playbook_base_path }}/storage/music` directory into 
 
 navidrome_container_additional_volumes:
   - type: bind
-    src: "{{ mash_playbook_base_path }}/storage/music"
+    src: "{{ sgc_playbook_base_path }}/storage/music"
     dst: /music
     options: readonly
 

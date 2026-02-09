@@ -66,7 +66,7 @@ After running the command for installation, the Adminer instance becomes availab
 
 To get started, open the URL with a web browser to log in to the instance with the database's credentials specified on your `vars.yml` file.
 
-To log in to database servers which this playbook manages, you need to specify its `*_identifier` to the `server` input area. For example, the default value for the MariaDB server is `mash-mariadb` and the one for the Postgres server is `mash-postgres`, respectively.
+To log in to database servers which this playbook manages, you need to specify its `*_identifier` to the `server` input area. For example, the default value for the MariaDB server is `mash-mariadb` and the one for the Postgres server is `sgc-postgres`, respectively.
 
 >[!NOTE]
 > Since enabling Adminer with this playbook exposes the instance (thus practically the databases as well) to the internet, it is important to set a proper method to restrict who can access to it. See [this section](https://www.adminer.org/en/#requirements) on the project website for security recommendations.
