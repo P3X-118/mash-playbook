@@ -10,9 +10,13 @@
 # ignores macos files
 .DS_Store
 
+<<<<<<< Updated upstream
 #/requirements.yml
 #/setup.yml
 #/group_vars/mash_servers
+=======
+/group_vars/mash_servers
+>>>>>>> Stashed changes
 
 /run/*
 !/run/.gitkeep
