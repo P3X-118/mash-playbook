@@ -768,7 +768,7 @@
   name: systemd_docker_base
   activation_prefix: ""
 - src: git+https://github.com/P3X-118/systemd-ar.git
-  version: v1.0.2
+  version: 1.0.2
   name: systemd_service_manager
   activation_prefix: ""
 #- src: git+https://github.com/IUCCA/ansible-role-tandoor.git
