@@ -1,21 +1,21 @@
 ---
 
-- src: git+https://github.com/P3X-118/ansible-role-adguard-home.git
-  version: v0.107.71-0
-  name: adguard_home
-  activation_prefix: adguard_home_
+#- src: git+https://github.com/P3X-118/ansible-role-adguard-home.git
+#  version: v0.107.71-0
+#  name: adguard_home
+#  activation_prefix: adguard_home_
 - src: git+https://github.com/P3X-118/ansible-role-golang.git
-  version: v3.5.0
+  version: 3.5.2
   name: golang 
   activation_prefix: golang_
-- src: git+https://github.com/P3X-118/ansible-role-adminer.git
-  version: v2.0.20
-  name: adminer
-  activation_prefix: adminer_
-- src: git+https://github.com/P3X-118/ansible-role-anki.git
-  version: v25.09.2-4
-  name: anki
-  activation_prefix: anki_
+#- src: git+https://github.com/P3X-118/ansible-role-adminer.git
+#  version: v2.0.20
+#  name: adminer
+#  activation_prefix: adminer_
+#- src: git+https://github.com/P3X-118/ansible-role-anki.git
+#  version: v25.09.2-4
+#  name: anki
+#  activation_prefix: anki_
 #- src: git+https://github.com/P3X-118/ansible-role-anonymousoverflow.git
 #  version: v2024.8.23-10
 #  name: anonymousoverflow
@@ -38,10 +38,10 @@
 #  version: v1.9.6-0
 #  name: apprise
 #  activation_prefix: apprise_
-- src: git+https://github.com/P3X-118/ansible-role-appsmith.git
-  version: v1.73.1-3
-  name: appsmith
-  activation_prefix: appsmith_
+#- src: git+https://github.com/P3X-118/ansible-role-appsmith.git
+#  version: v1.73.1-3
+#  name: appsmith
+#  activation_prefix: appsmith_
 #- src: git+https://github.com/P3X-118/asciinema.git
 #  version: v20251114-3
 #  name: asciinema_server
@@ -54,14 +54,14 @@
 #  version: v2.31.0-0
 #  name: audiobookshelf
 #  activation_prefix: audiobookshelf_
-- src: git+https://github.com/P3X-118/ansible-role-authelia.git
-  version: v4.37.5-10
-  name: authelia
-  activation_prefix: authelia_
-- src: git+https://github.com/P3X-118/ansible-role-authentik.git
-  version: v2025.10.3-0
-  name: authentik
-  activation_prefix: authentik_
+#- src: git+https://github.com/P3X-118/ansible-role-authelia.git
+#  version: v4.37.5-10
+#  name: authelia
+#  activation_prefix: authelia_
+#- src: git+https://github.com/P3X-118/ansible-role-authentik.git
+#  version: v2025.10.3-0
+#  name: authentik
+#  activation_prefix: authentik_
 # prolly set this up
 #- src: git+https://github.com/spatterIight/ansible-role-autobrr.git
 #  version: v1.71.0-0
@@ -71,8 +71,8 @@
   version: v1.0.0-5
   name: auxiliary
   activation_prefix: aux_
-- src: git+https://github.com/P3X-118/ansible-role-borgbackup.git
-  version: v1.1.3
+- src: git+https://github.com/P3X-118/backup_borg-ar.git
+  version: 1.4.3-2.1.1-2
   name: backup
   activation_prefix: backup_
 #- src: git+https://seed.radicle.garden/z3JDUHjeHMqbZ3YLxquSUbCmAJLi.git
@@ -87,14 +87,14 @@
   version: v9.20-1
   name: bind
   activation_prefix: bind_
-- src: git+https://github.com/P3X-118/ansible-role-browserless.git
-  version: v2.38.2-1
-  name: browserless
-  activation_prefix: browserless_
-- src: git+https://github.com/P3X-118/ansible-role-calibre-web.git
-  version: v0.6.25-3
-  name: calibre_web
-  activation_prefix: calibre_web_
+#- src: git+https://github.com/P3X-118/ansible-role-browserless.git
+#  version: v2.38.2-1
+#  name: browserless
+#  activation_prefix: browserless_
+#- src: git+https://github.com/P3X-118/ansible-role-calibre-web.git
+#  version: v0.6.25-3
+#  name: calibre_web
+#  activation_prefix: calibre_web_
 #- src: git+https://github.com/P3X-118/cap.git
 #  version: v2.0.18-0
 #  name: cap
@@ -107,10 +107,10 @@
   version: main
   name: cleanup
   activation_prefix: system_cleanup_
-- src: git+https://github.com/P3X-118/ansible-role-clickhouse.git
-  version: v25.11.2.24-0
-  name: clickhouse
-  activation_prefix: clickhouse_
+#- src: git+https://github.com/P3X-118/ansible-role-clickhouse.git
+#  version: v25.11.2.24-0
+#  name: clickhouse
+#  activation_prefix: clickhouse_
 #- src: git+https://github.com/P3X-118/ansible-role-collabora-online.git
 #  version: v25.04.7.2.1-0
 #  name: collabora_online
@@ -119,10 +119,10 @@
   version: v0.4.2-0
   name: container_socket_proxy
   activation_prefix: mash_
-- src: git+https://github.com/P3X-118/ansible-role-convertx.git
-  version: v0.16.0-0
-  name: convertx
-  activation_prefix: convertx_
+#- src: git+https://github.com/P3X-118/ansible-role-convertx.git
+#  version: v0.16.0-0
+#  name: convertx
+#  activation_prefix: convertx_
 #- src: git+https://github.com/Bergruebe/ansible-role-couchdb.git
 #  version: v3.4.3-0
 #  name: couchdb
@@ -171,10 +171,10 @@
 #  version: v0.0.0-10
 #  name: echoip
 #  activation_prefix: echoip_
-- src: git+https://github.com/P3X-118/ansible-role-endlessh.git
-  version: v2025-0
-  name: endlessh
-  activation_prefix: endlessh_
+#- src: git+https://github.com/P3X-118/ansible-role-endlessh.git
+#  version: v2025-0
+#  name: endlessh
+#  activation_prefix: endlessh_
 #- src: git+https://seed.radicle.garden/z2CSxS3YLtJYM87TyGZkZCan3uoSJ.git
 #  version: v2.16.0-1
 #  name: ergo
@@ -195,7 +195,7 @@
   version: v2023.12.15-4
   name: excalidraw_room
   activation_prefix: excalidraw_room_
-- src: git+https://github.com/P3X-118/ansible-role-exim-relay.git
+- src: git+https://github.com/P3X-118/exim-ar.git
   version: v4.98.1-r0-2-2
   name: exim_relay
   activation_prefix: exim_relay_
@@ -219,14 +219,14 @@
 #  version: v0.7.36-6
 #  name: firezone
 #  activation_prefix: firezone_
-- src: git+https://github.com/P3X-118/ansible-role-flaresolverr.git
-  version: v3.4.1-0
-  name: flaresolverr
-  activation_prefix: flaresolverr_
-- src: git+https://github.com/P3X-118/ansible-role-fmd-server.git
-  version: v0.13.0-1
-  name: fmd_server
-  activation_prefix: fmd_server_
+#- src: git+https://github.com/P3X-118/ansible-role-flaresolverr.git
+#  version: v3.4.1-0
+#  name: flaresolverr
+#  activation_prefix: flaresolverr_
+#- src: git+https://github.com/P3X-118/ansible-role-fmd-server.git
+#  version: v0.13.0-1
+#  name: fmd_server
+#  activation_prefix: fmd_server_
 #- src: git+https://github.com/P3X-118/ansible-role-focalboard.git
 #  version: v7.11.4-2
 #  name: focalboard
@@ -307,8 +307,8 @@
   version: v2.3.1-1
   name: immich
   activation_prefix: immich_
-- src: git+https://github.com/P3X-118/ansible-role-immich-kiosk.git
-  version: v0.28.4-0
+- src: git+https://github.com/P3X-118/immich_kiosk-ar.git
+  version: v0.30.1-1
   name: immich_kiosk
   activation_prefix: immich_kiosk_
 #- src: git+https://github.com/P3X-118/ansible-role-infisical.git
@@ -395,10 +395,10 @@
 #  version: v0.6.2-3
 #  name: lldap
 #  activation_prefix: lldap_
-- src: git+https://github.com/P3X-118/ansible-role-loki.git
-  version: v3.6.1-0
-  name: loki
-  activation_prefix: loki_
+#- src: git+https://github.com/P3X-118/ansible-role-loki.git
+#  version: v3.6.1-0
+#  name: loki
+#  activation_prefix: loki_
 #- src: git+https://seed.radicle.garden/z3QmarrgiC7ZGmd7UCTW2EZTheCZb.git
 #  version: v0.10.0-0
 #  name: mailcatcher
@@ -411,10 +411,10 @@
 #  version: v12.1.2-0
 #  name: mariadb
 #  activation_prefix: mariadb_
-#- src: git+https://github.com/P3X-118/ansible-role-matomo.git
-#  version: v5.6.1-0
-#  name: matomo
-#  activation_prefix: matomo_
+- src: git+https://github.com/P3X-118/matomo-ar.git
+  version: v5.7.1-0
+  name: matomo
+  activation_prefix: matomo_
 #- src: git+https://github.com/P3X-118/ansible-role-matterbridge.git
 #  version: v1.26.0-10
 #  name: matterbridge
@@ -475,10 +475,10 @@
 #  version: v0.59.0-0
 #  name: navidrome
 #  activation_prefix: navidrome_
-- src: git+https://github.com/P3X-118/neko-ar.git
-  version: v3.0.9-0
-  name: neko
-  activation_prefix: neko_
+#- src: git+https://github.com/P3X-118/neko-ar.git
+#  version: v3.0.9-2
+#  name: neko
+#  activation_prefix: neko_
 #- src: git+https://github.com/P3X-118/ansible-role-netbox.git
 #  version: v3.7.0-2.8.0-2
 #  name: netbox
@@ -575,18 +575,18 @@
 #  version: v3.1.0-0
 #  name: plausible
 #  activation_prefix: plausible_
-- src: git+https://github.com/P3X-118/ansible-role-playbook_help
-  version: 8630e4f1749bcb659c412820f754473f09055052
+- src: git+https://github.com/P3X-118/playbook_help-ar
+  version: 0.0.1
   name: playbook_help
   activation_prefix: ""
-#- src: git+https://github.com/devture/com.devture.ansible.role.playbook_runtime_messages.git
-#  version: 9b4b088c62b528b73a9a7c93d3109b091dd42ec6
-#  name: playbook_runtime_messages
-#  activation_prefix: ""
-#- src: git+https://github.com/devture/com.devture.ansible.role.playbook_state_preserver.git
-#  version: dd6e15246b7a9a2d921e0b3f9cd8a4a917a1bb2f
-#  name: playbook_state_preserver
-#  activation_prefix: devture_playbook_state_preserver_
+- src: git+https://github.com/P3X-118/playbook_runtime_messages-ar
+  version: 1.0.0-1
+  name: playbook_runtime_messages
+  activation_prefix: ""
+- src: git+https://github.com/P3X-118/playbook_state_preserver-ar
+  version: 1.0.0-2
+  name: playbook_state_preserver
+  activation_prefix: playbook_state_preserver_
 #- src: git+https://github.com/spatterIight/ansible-role-plex.git
 #  version: v1.42.2-1
 #  name: plex
@@ -767,10 +767,10 @@
   version: v1.4.1-0
   name: systemd_docker_base
   activation_prefix: ""
-#- src: git+https://github.com/devture/com.devture.ansible.role.systemd_service_manager.git
-#  version: v1.0.0-4
-#  name: systemd_service_manager
-#  activation_prefix: ""
+- src: git+https://github.com/P3X-118/systemd-ar.git
+  version: 1.0.0-5
+  name: systemd_service_manager
+  activation_prefix: ""
 #- src: git+https://github.com/IUCCA/ansible-role-tandoor.git
 #  version: v2.3.6-0
 #  name: tandoor
