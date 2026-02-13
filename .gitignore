@@ -23,4 +23,4 @@
 # Ignore bad git practice objects
 *.og
 
-requirements.yml
+/requirements.yml
