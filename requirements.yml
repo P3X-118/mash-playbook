@@ -71,10 +71,10 @@
   version: v1.0.0-5
   name: auxiliary
   activation_prefix: aux_
-- src: git+https://github.com/P3X-118/backup_borg-ar.git
-  version: 1.4.3-2.1.1-2
-  name: backup
-  activation_prefix: backup_
+#- src: git+https://github.com/P3X-118/backup_borg-ar.git
+#  version: 1.4.3-2.1.1-2
+#  name: backup
+#  activation_prefix: backup_
 #- src: git+https://seed.radicle.garden/z3JDUHjeHMqbZ3YLxquSUbCmAJLi.git
 #  version: v5.10.0-0
 #  name: barassistant
