@@ -151,7 +151,7 @@
 #  version: v1.0.0-4
 #  name: docker_registry_purger
 #  activation_prefix: docker_registry_purger_
-- src: git+https://github.com/P3X-118/docker_python_sdk.git
+- src: git+https://github.com/P3X-118/docker_python_sdk-ar.git
   version: 0.0.1
   name: docker_python_sdk
   activation_prefix: docker_python_sdk
