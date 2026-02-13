@@ -119,7 +119,7 @@ service_directory_prefix: 'immich-'
 ########################################################################
 
 # See: docs/configuring-ipv6.md
-devture_systemd_docker_base_ipv6_enabled: true
+sysd_docker_ipv6_enabled: true
 
 ########################################################################
 #                                                                      #

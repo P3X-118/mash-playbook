@@ -25,3 +25,6 @@
 !/run/.gitkeep
 
 !/group_vars/.gitkeep
+
+# Ignore bad git practice objects
+*.og

@@ -104,7 +104,7 @@ Our new [Configuring IPv6](./docs/configuring-ipv6.md) documentation page has mo
 **Existing playbook users** will **need to do some manual work** to enable IPv6 support. This consists of:
 
 - enabling IPv6 support for the Docker container networks:
-	- add `devture_systemd_docker_base_ipv6_enabled: true` to their `vars.yml` configuration file
+	- add `sysd_docker_ipv6_enabled: true` to their `vars.yml` configuration file
 	- stop all services (`just stop-all`)
 	- delete all container networks on the server: `docker network rm $(docker network ls -q)`
 	- re-run the playbook fully: `just install-all`
@@ -112,15 +112,15 @@ Our new [Configuring IPv6](./docs/configuring-ipv6.md) documentation page has mo
 - [configuring IPv6 (`AAAA`) DNS records](./docs/configuring-ipv6.md#configuring-dns-records-for-ipv6)
 
 > [!WARNING]
-> Not all mash-playbook Ansible roles respect the `devture_systemd_docker_base_ipv6_enabled` setting yet.
+> Not all mash-playbook Ansible roles respect the `sysd_docker_ipv6_enabled` setting yet.
 > Even if you enable this setting, you may still see that some container networks and services aren't IPv6-enabled.
-> **Consider sending pull requests** for the playbook roles that do not respect the `devture_systemd_docker_base_ipv6_enabled` setting yet.
+> **Consider sending pull requests** for the playbook roles that do not respect the `sysd_docker_ipv6_enabled` setting yet.
 
 # 2025-02-21
 
 ## Docker daemon options are no longer adjusted when IPv6 is enabled
 
-We landed initial IPv6 support in the past via a `devture_systemd_docker_base_ipv6_enabled` variable that one had to toggle to `true`.
+We landed initial IPv6 support in the past via a `sysd_docker_ipv6_enabled` variable that one had to toggle to `true`.
 
 This variable did **2 different things at once**:
 
@@ -131,23 +131,23 @@ Since Docker 27.0.1's [changes to how it handles IPv6](https://docs.docker.com/e
 - `ip6tables` defaults to `true` for everyone
 - `ip6tables` is out of the experimental phase, so `experimental` is no longer necessary
 
-In light of this, we're introducing a new variable (`devture_systemd_docker_base_ipv6_daemon_options_changing_enabled`) for controlling if IPv6 should be force-enabled in the Docker daemon's configuration options.
+In light of this, we're introducing a new variable (`sysd_docker_ipv6_daemon_options_changing_enabled`) for controlling if IPv6 should be force-enabled in the Docker daemon's configuration options.
 Since most people should be on a modern enough Docker daemon version which doesn't require such changes, this variable defaults to `false`.
 
 This change affects you like this:
 
-- ✅ if you're **not explicitly enabling IPv6** (via `devture_systemd_docker_base_ipv6_enabled` in your configuration): you're unaffected
-- ❓ if you're **explicitly enabling IPv6** (via `devture_systemd_docker_base_ipv6_enabled` in your configuration):
+- ✅ if you're **not explicitly enabling IPv6** (via `sysd_docker_ipv6_enabled` in your configuration): you're unaffected
+- ❓ if you're **explicitly enabling IPv6** (via `sysd_docker_ipv6_enabled` in your configuration):
   - ✅ .. and you're on a modern enough Docker version (which you most likely are): the playbook will no longer mess with your Docker daemon options. You're unaffected.
   - 🔧 .. and you're on an old Docker version, you **are affected** and need to use the following configuration to restore the old behavior:
 
     ```yml
     # Force-enable IPv6 by changing the Docker daemon's options.
     # This is necessary for Docker < 27.0.1, but not for newer versions.
-    devture_systemd_docker_base_ipv6_daemon_options_changing_enabled: true
+    sysd_docker_ipv6_daemon_options_changing_enabled: true
 
     # Request that individual container networks are created with IPv6 enabled.
-    devture_systemd_docker_base_ipv6_enabled: true
+    sysd_docker_ipv6_enabled: true
     ```
 
 # 2024-09-27

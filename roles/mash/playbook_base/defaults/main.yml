@@ -77,11 +77,11 @@ docker_daemon_install_options: "{{ docker_daemon_install_options_auto | combine(
 #
 # Despite IPv6-enablement at the Docker level being a thing, for IPv6 to work for containers
 # networks need to be created with IPv6 explicitly enabled.
-# This is controlled by the `devture_systemd_docker_base_ipv6_enabled` variable and it's up to the various roles to
+# This is controlled by the `sysd_docker_ipv6_enabled` variable and it's up to the various roles to
 # respect this variable when creating their networks.
 docker_daemon_install_options_auto: |
   {{
-    ({'experimental': true, 'ip6tables': true} if devture_systemd_docker_base_ipv6_daemon_options_changing_enabled else {})
+    ({'experimental': true, 'ip6tables': true} if sysd_docker_ipv6_daemon_options_changing_enabled else {})
   }}
 
 docker_daemon_install_options_custom: {}

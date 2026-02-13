@@ -25,9 +25,9 @@ Enabling IPv6 consists of 2 steps:
 💡 If you've followed a recent version of our documentation, you would have already done these steps, so there's nothing else to do.
 
 > [!WARNING]
-> Not all mash-playbook Ansible roles respect the `devture_systemd_docker_base_ipv6_enabled` setting yet.
+> Not all mash-playbook Ansible roles respect the `sysd_docker_ipv6_enabled` setting yet.
 > Even if you enable this setting, you may still see that some container networks and services aren't IPv6-enabled.
-> **Consider sending pull requests** for the playbook roles that do not respect the `devture_systemd_docker_base_ipv6_enabled` setting yet.
+> **Consider sending pull requests** for the playbook roles that do not respect the `sysd_docker_ipv6_enabled` setting yet.
 
 ## Enabling IPv6 support for the playbook
 
@@ -55,7 +55,7 @@ You can enable IPv6 support for all components' Docker container networks by usi
 # People managing Docker themselves and running an older Docker version will need additional configuration.
 #
 # Learn more in `docs/configuring-ipv6.md`.
-devture_systemd_docker_base_ipv6_enabled: true
+sysd_docker_ipv6_enabled: true
 
 ########################################################################
 #                                                                      #
@@ -66,7 +66,7 @@ devture_systemd_docker_base_ipv6_enabled: true
 
 Doing this:
 
-- all container networks will be IPv6-enabled. Note that not all mash-playbook Ansible roles respect the `devture_systemd_docker_base_ipv6_enabled` setting yet. See **WARNING** below for details.
+- all container networks will be IPv6-enabled. Note that not all mash-playbook Ansible roles respect the `sysd_docker_ipv6_enabled` setting yet. See **WARNING** below for details.
 
 - NAT66 will be used, so that:
   - containers will get [Unique Local Addresses (ULA)](https://en.wikipedia.org/wiki/Unique_local_address)
@@ -85,7 +85,7 @@ To confirm connectivity, see the following other resources:
 - [How do I confirm if my container networks are IPv6-enabled?](#how-do-i-confirm-if-my-container-networks-are-ipv6-enabled)
 
 > [!WARNING]
-> Not all mash-playbook Ansible roles respect the `devture_systemd_docker_base_ipv6_enabled` setting yet.
+> Not all mash-playbook Ansible roles respect the `sysd_docker_ipv6_enabled` setting yet.
 > Even if you enable this setting, you may still see that some container networks and services aren't IPv6-enabled.
 > Even so, services should still be reachable over IPv6 (via NAT64), so they will not be able to see the client's actual IPv6 address.
 > See the NAT64 warning above.
@@ -106,7 +106,7 @@ Docker versions newer than 27.0.1 enable IPv6 integration at the Docker daemon l
 
 **If you're on an old Docker version** (Docker 27.0.0 or older) for some reason, it's likely that your Docker installation is not enabled for IPv6 at all. In such a case:
 
-- if Docker is managed by the playbook, you can tell it to force-enable IPv6 via `devture_systemd_docker_base_ipv6_daemon_options_changing_enabled: true`
+- if Docker is managed by the playbook, you can tell it to force-enable IPv6 via `sysd_docker_ipv6_daemon_options_changing_enabled: true`
 
 - if Docker is managed by you manually, you can add `{"experimental": true, "ip6tables": true}` to the Docker daemon options and restart the Docker service (`docker.service`).
 
@@ -126,18 +126,18 @@ You can run `ip -6 addr` to see if you have any IPv6 addresses assigned to your 
 
 If you do have an IPv6 address, it's still worth [using curl](#with-curl) to confirm that your server can successfully make outgoing requests over IPv6.
 
-#### What does the `devture_systemd_docker_base_ipv6_enabled` setting actually do?
+#### What does the `sysd_docker_ipv6_enabled` setting actually do?
 
-The `devture_systemd_docker_base_ipv6_enabled` setting controls whether container networks will be created with IPv6 support.
+The `sysd_docker_ipv6_enabled` setting controls whether container networks will be created with IPv6 support.
 
 Changing this setting subsequently requires manual work (deleting all container networks).
-See [I've changed the `devture_systemd_docker_base_ipv6_enabled` setting, but it doesn't seem to have any effect](#i-ve-changed-the-devture_systemd_docker_base_ipv6_enabled-setting-but-it-doesn-t-seem-to-have-any-effect).
+See [I've changed the `sysd_docker_ipv6_enabled` setting, but it doesn't seem to have any effect](#i-ve-changed-the-sysd_docker_ipv6_enabled-setting-but-it-doesn-t-seem-to-have-any-effect).
 
-#### I've changed the `devture_systemd_docker_base_ipv6_enabled` setting, but it doesn't seem to have any effect.
+#### I've changed the `sysd_docker_ipv6_enabled` setting, but it doesn't seem to have any effect.
 
 If you're using an older Docker version (Docker 27.0.0 or older), see [A note about old Docker](#a-note-about-old-docker).
 
-If you've previously installed with one `devture_systemd_docker_base_ipv6_enabled` value and then changed it to another, you need to:
+If you've previously installed with one `sysd_docker_ipv6_enabled` value and then changed it to another, you need to:
 
 - stop all services (`just stop-all`)
 - delete all container networks on the server: `docker network rm $(docker network ls -q)`
@@ -152,7 +152,7 @@ For each container network (e.g. `traefik`), you can check if it has IPv6 connec
 Ensure that there's an IPv6 subnet/gateway in the `IPAM.Config` section. If yes, you may wish to proceed with [How do I check outgoing IPv6 connectivity for containers?](#how-do-i-check-outgoing-ipv6-connectivity-for-containers)
 
 If there's no IPv6 subnet/gateway in the `IPAM.Config` section, this container network was not created with IPv6 support.
-See [I've changed the `devture_systemd_docker_base_ipv6_enabled` setting, but it doesn't seem to have any effect](#i-ve-changed-the-devture_systemd_docker_base_ipv6_enabled-setting-but-it-doesn-t-seem-to-have-any-effect).
+See [I've changed the `sysd_docker_ipv6_enabled` setting, but it doesn't seem to have any effect](#i-ve-changed-the-sysd_docker_ipv6_enabled-setting-but-it-doesn-t-seem-to-have-any-effect).
 
 #### How do I check outgoing IPv6 connectivity for containers?
 
@@ -160,7 +160,7 @@ See [I've changed the `devture_systemd_docker_base_ipv6_enabled` setting, but it
 docker run --rm --network=traefik quay.io/curl/curl:latest curl -6 https://icanhazip.com
 ```
 
-💡 This one-off container is connected to the `traefik` container network, not to the default Docker bridge network. The default Docker `bridge` network does not have IPv6 connectivity by default (yet) and is not influenced by the `devture_systemd_docker_base_ipv6_enabled` setting, so using that network (by omitting `--network=..` from the command above) will not show an IPv6 address
+💡 This one-off container is connected to the `traefik` container network, not to the default Docker bridge network. The default Docker `bridge` network does not have IPv6 connectivity by default (yet) and is not influenced by the `sysd_docker_ipv6_enabled` setting, so using that network (by omitting `--network=..` from the command above) will not show an IPv6 address
 
 ✅ If this command returns an IPv6 address, you're all good.
 
@@ -190,7 +190,7 @@ Because when your network does get support for IPv6 later on (even if that's 5 y
 
 Not easily.
 
-The playbook and the various roles only support passing an `enable_ipv6` flag (`true` or `false` value depending on the `devture_systemd_docker_base_ipv6_enabled` Ansible variable) when creating the Docker container networks.
+The playbook and the various roles only support passing an `enable_ipv6` flag (`true` or `false` value depending on the `sysd_docker_ipv6_enabled` Ansible variable) when creating the Docker container networks.
 
 There's no support for passing a custom subnet for IPv4 and IPv6. We let Docker auto-generate the subnets for us.
 
@@ -218,4 +218,4 @@ It's as simple as adjusting its container-network-creation Ansible task in its `
 
 Feel free to submit Pull Requests.
 
-Note that changing the `enable_ipv6` flag requires that the container network be recreated. See [I've changed the `devture_systemd_docker_base_ipv6_enabled` setting, but it doesn't seem to have any effect](#i-ve-changed-the-devture_systemd_docker_base_ipv6_enabled-setting-but-it-doesn-t-seem-to-have-any-effect).
+Note that changing the `enable_ipv6` flag requires that the container network be recreated. See [I've changed the `sysd_docker_ipv6_enabled` setting, but it doesn't seem to have any effect](#i-ve-changed-the-sysd_docker_ipv6_enabled-setting-but-it-doesn-t-seem-to-have-any-effect).
