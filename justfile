@@ -56,11 +56,15 @@ update *flags: _requirements-yml update-playbook-only
     fi
 
 # Updates the playbook without installing/updating Ansible roles
+# NOTE: Git operations temporarily disabled to prevent requirements.yml refresh.
+# Re-enable if repository sync is needed.
 update-playbook-only:
     @echo "Updating playbook..."
-    @git stash -q
-    @git pull -q
-    @-git stash pop -q
+    @echo "[INFO] Git operations disabled (stash/pull/pop skipped)."
+
+    # @git stash -q
+    # @git pull -q
+    # @-git stash pop -q
 
 # -----------------------------
 # Optimization
