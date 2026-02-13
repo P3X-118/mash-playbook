@@ -475,7 +475,7 @@
 #  version: v0.59.0-0
 #  name: navidrome
 #  activation_prefix: navidrome_
-- src: git+https://github.com/P3X-118/ansible-role-neko.git
+- src: git+https://github.com/P3X-118/neko-ar.git
   version: v3.0.9-0
   name: neko
   activation_prefix: neko_
