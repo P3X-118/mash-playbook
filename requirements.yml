@@ -540,7 +540,7 @@
 #  name: overseerr
 #  activation_prefix: overseerr_
 - src: git+https://github.com/P3X-118/okast-ar.git
-  version: 0.2.3-9
+  version: 0.2.3-10
   name: owncast
   activation_prefix: owncast_
 #- src: git+https://github.com/P3X-118/ansible-role-oxitraffic.git
