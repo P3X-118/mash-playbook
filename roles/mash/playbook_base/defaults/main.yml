@@ -101,8 +101,8 @@ revproxy_middleout_compression_enabled: "{{ traefik_config_http_middlewares_comp
 revproxy_middleout_compression_name: "{{ (traefik_config_http_middlewares_compression_middleware_name + '@file') if traefik_enabled else '' }}"
 
 # Controls the additional network that reverse-proxyable services will be connected to.
-#revproxy_service_networks: "{{ traefik_container_network if traefik_enabled | default(false) else '' }}"
-revproxy_service_networks: "{{ traefik_container_network if (traefik_enabled | default(false) | bool) else '' }}"
+revproxy_service_networks: "{{ traefik_container_network if traefik_enabled | default(false) else '' }}"
+#revproxy_service_networks: "{{ traefik_container_network if (traefik_enabled | default(false) | bool) else '' }}"
 
 # Controls whether various services should expose metrics publicly.
 # If Prometheus is operating on the same machine, exposing metrics publicly is not necessary.
