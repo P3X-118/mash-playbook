@@ -338,7 +338,7 @@ sgc_sysd_srvc_list_auto_itemized:
 
   # role-specific:excalidraw
   - |-
-    {{ ({'name': (excalidraw_identifier + '.service'), 'priority': 2000, 'groups': ['mash', 'excalidraw']} if excalidraw_enabled else omit) }}
+    {{ ({'name': (excalidraw_identifier + '.service'), 'priority': 2000, 'groups': ['sgc', 'excalidraw']} if excalidraw_enabled else omit) }}
   # /role-specific:excalidraw
 
   # role-specific:excalidraw_room
