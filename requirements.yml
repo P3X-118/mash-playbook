@@ -154,7 +154,7 @@
 - src: git+https://github.com/P3X-118/docker_python_sdk-ar.git
   version: 0.0.1
   name: docker_python_sdk
-  activation_prefix: docker_python_sdk_enabled
+  activation_prefix: docker_python_sdk
 #- src: git+https://github.com/P3X-118/ansible-role-docmost.git
 #  version: v0.24.1-0
 #  name: docmost
