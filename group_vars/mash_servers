@@ -10892,7 +10892,7 @@ owncast_gid: "{{ sgc_playbook_gid }}"
 
 owncast_container_additional_networks_auto: |
   {{
-    ([revproxy_service_networks] if revproxy_service_networks else [])
+    ([revproxy_service_networks] if (owncast_container_labels_traefik_enabled and revproxy_service_networks) else [])
   }}
 
 owncast_container_labels_traefik_enabled: "{{ traefik_labels_enabled }}"
