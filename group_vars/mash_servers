@@ -2173,7 +2173,7 @@ traefik_gid: "{{ sgc_playbook_gid }}"
 
 traefik_systemd_required_services_list: |
   {{
-    ([devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [])
+    ([sysd_docker_service] if sysd_docker_service else [])
     +
     ([container_socket_proxy_identifier + '.service'] if container_socket_proxy_enabled | default(false) else [])
   }}
@@ -3430,7 +3430,7 @@ bind_config_key_default_rndc_secret_raw: "{{ '%s' | format(sgc_pgsk) | password_
 
 bind_systemd_required_services_list_auto: |
   {{
-    ([devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [])
+    ([sysd_docker_service] if sysd_docker_service else [])
   }}
 
 ########################################################################
@@ -4355,7 +4355,7 @@ dokuwiki_gid: "{{ sgc_playbook_gid }}"
 
 dokuwiki_systemd_required_services_list: |
   {{
-    ([devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [])
+    ([sysd_docker_service] if sysd_docker_service else [])
   }}
 
 dokuwiki_container_additional_networks_auto: |
@@ -7163,7 +7163,7 @@ ilmo_secret: "{{ '%s' | format(sgc_pgsk) | password_hash('sha512', 'secret.ilmo'
 
 ilmo_systemd_required_services_list: |
   {{
-    ([devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [])
+    ([sysd_docker_service] if sysd_docker_service else [])
     +
     ([postgres_identifier ~ '.service'] if postgres_enabled and ilmo_database_host == postgres_connection_hostname else [])
   }}
@@ -7335,7 +7335,7 @@ infisical_gid: "{{ sgc_playbook_gid }}"
 
 infisical_backend_systemd_required_services_list: |
   {{
-    ([devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [])
+    ([sysd_docker_service] if sysd_docker_service else [])
     +
     ([mongodb_identifier ~ '.service'] if mongodb_enabled and infisical_mongodb_hostname == mongodb_identifier else [])
   }}
@@ -9465,7 +9465,7 @@ mobilizon_secret_key_base: "{{ '%s' | format(sgc_pgsk) | password_hash('sha512',
 
 mobilizon_systemd_required_services_list: |
   {{
-    ([devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [])
+    ([sysd_docker_service] if sysd_docker_service else [])
     +
     ([postgis_identifier ~ '.service'] if postgis_enabled and mobilizon_database_hostname == postgis_identifier else [])
   }}
@@ -9819,7 +9819,7 @@ n8n_gid: "1000"
 
 n8n_systemd_required_services_list: |
   {{
-    ([devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [])
+    ([sysd_docker_service] if sysd_docker_service else [])
     +
     ([postgres_identifier ~ '.service'] if postgres_enabled and n8n_database_hostname == postgres_connection_hostname else [])
   }}
@@ -10234,7 +10234,7 @@ notfellchen_secret: "{{ '%s' | format(sgc_pgsk) | password_hash('sha512', 'secre
 
 notfellchen_systemd_required_services_list: |
   {{
-    ([devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [])
+    ([sysd_docker_service] if sysd_docker_service else [])
     +
     ([postgres_identifier ~ '.service'] if postgres_enabled and notfellchen_database_host == postgres_connection_hostname else [])
   }}
@@ -13725,7 +13725,7 @@ tsdproxy_gid: "{{ sgc_playbook_gid }}"
 
 tsdproxy_systemd_required_services_list: |
   {{
-    ([devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [])
+    ([sysd_docker_service] if sysd_docker_service else [])
     +
     ([container_socket_proxy_identifier + '.service'] if container_socket_proxy_enabled | default(false) else [])
   }}
