@@ -795,8 +795,8 @@
 #  version: v4.1.0-0
 #  name: tinyauth
 #  activation_prefix: tinyauth_
-- src: git+https://github.com/P3X-118/ansible-role-traefik.git
-  version: v3.6.5-0
+- src: git+https://github.com/P3X-118/traefik-ar.git
+  version: 3.6.5-1
   name: traefik
   activation_prefix: sgc_
 #- src: git+https://github.com/P3X-118/ansible-role-traefik-certs-dumper.git
