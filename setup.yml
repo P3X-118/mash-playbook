@@ -234,11 +234,11 @@
     # /role-specific:ddclient
 
     # role-specific:docker_registry
-    - role: galaxy/docker_registry
+    #- role: galaxy/docker_registry
     # /role-specific:docker_registry
 
     # role-specific:docker_registry_browser
-    - role: galaxy/docker_registry_browser
+    #- role: galaxy/docker_registry_browser
     # /role-specific:docker_registry_browser
 
     # role-specific:docker_registry_proxy
