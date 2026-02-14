@@ -798,7 +798,7 @@
 - src: git+https://github.com/P3X-118/ansible-role-traefik.git
   version: v3.6.5-0
   name: traefik
-  activation_prefix: mash_
+  activation_prefix: sgc_
 #- src: git+https://github.com/P3X-118/ansible-role-traefik-certs-dumper.git
 #  version: v2.10.0-3
 #  name: traefik_certs_dumper
