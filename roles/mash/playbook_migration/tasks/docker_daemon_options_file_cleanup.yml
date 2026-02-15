@@ -18,7 +18,8 @@
 # Ideally, this task would be part of the `ansible-role-docker` role, but it's not (yet).
 # See: https://github.com/geerlingguy/ansible-role-docker/pull/498
 - name: Ensure the Docker daemon options file is deleted when no longer needed
-  when: docker_daemon_options.keys() | length == 0
+  #when: docker_daemon_options.keys() | length == 0
+  when: docker_daemon_options | default({}) | length == 0
   ansible.builtin.file:
     path: "{{ docker_daemon_options_file_path }}"
     state: absent
