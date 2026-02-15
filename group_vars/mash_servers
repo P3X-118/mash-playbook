@@ -251,7 +251,7 @@ sgc_sysd_srvc_list_auto_itemized:
 
   # role-specific:container_socket_proxy
   - |-
-    {{ ({'name': (container_socket_proxy_identifier + '.service'), 'priority': 200, 'groups': ['mash', 'reverse-proxies', 'container-socket-proxy']} if container_socket_proxy_enabled else omit) }}
+    {{ ({'name': (container_socket_proxy_identifier + '.service'), 'priority': 200, 'groups': ['sgc', 'reverse-proxies', 'container-socket-proxy']} if container_socket_proxy_enabled else omit) }}
   # /role-specific:container_socket_proxy
 
   # role-specific:cryptpad
@@ -746,7 +746,7 @@ sgc_sysd_srvc_list_auto_itemized:
 
   # role-specific:neko
   - |-
-    {{ ({'name': (neko_identifier + '.service'), 'priority': 2000, 'groups': ['mash', 'neko']} if neko_enabled else omit) }}
+    {{ ({'name': (neko_identifier + '.service'), 'priority': 2000, 'groups': ['sgc', 'neko']} if neko_enabled else omit) }}
   # /role-specific:neko
 
   # role-specific:netbox
@@ -795,7 +795,7 @@ sgc_sysd_srvc_list_auto_itemized:
 
   # role-specific:ntfy
   - |-
-    {{ ({'name': (ntfy_identifier + '.service'), 'priority': 2000, 'groups': ['mash', 'ntfy']} if ntfy_enabled else omit) }}
+    {{ ({'name': (ntfy_identifier + '.service'), 'priority': 2000, 'groups': ['sgc', 'ntfy']} if ntfy_enabled else omit) }}
   # /role-specific:ntfy
 
   # role-specific:oauth2_proxy
@@ -882,7 +882,7 @@ sgc_sysd_srvc_list_auto_itemized:
 
   # role-specific:peertube
   - |-
-    {{ ({'name': (peertube_identifier + '.service'), 'priority': 2000, 'groups': ['mash', 'peertube']} if peertube_enabled else omit) }}
+    {{ ({'name': (peertube_identifier + '.service'), 'priority': 2000, 'groups': ['sgc', 'peertube']} if peertube_enabled else omit) }}
   # /role-specific:peertube
 
   # role-specific:pgadmin
@@ -922,12 +922,12 @@ sgc_sysd_srvc_list_auto_itemized:
 
   # role-specific:postgres
   - |-
-    {{ ({'name': (postgres_identifier + '.service'), 'priority': 500, 'groups': ['mash', 'postgres']} if postgres_enabled else omit) }}
+    {{ ({'name': (postgres_identifier + '.service'), 'priority': 500, 'groups': ['sgc', 'postgres']} if postgres_enabled else omit) }}
   # /role-specific:postgres
 
   # role-specific:postgres_backup
   - |-
-    {{ ({'name': (postgres_backup_identifier + '.service'), 'priority': 5000, 'groups': ['mash', 'backup', 'postgres-backup']} if postgres_backup_enabled else omit) }}
+    {{ ({'name': (postgres_backup_identifier + '.service'), 'priority': 5000, 'groups': ['sgc', 'backup', 'postgres-backup']} if postgres_backup_enabled else omit) }}
   # /role-specific:postgres_backup
 
   # role-specific:privatebin
