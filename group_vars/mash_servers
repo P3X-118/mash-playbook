@@ -12049,17 +12049,17 @@ prunemate_container_additional_networks_auto: |
 prunemate_container_labels_traefik_enabled: "{{ traefik_labels_enabled }}"
 prunemate_container_labels_traefik_docker_network: "{{ revproxy_service_networks }}"
 
-# role-specific:container_socket_proxy
-prunemate_docker_endpoint_is_unix_socket: "{{ false if prunemate_docker_endpoint.startswith('tcp://') else true }}"
-prunemate_docker_endpoint: "{{ container_socket_proxy_endpoint if container_socket_proxy_enabled else 'unix:///var/run/docker.sock' }}"
-container_socket_proxy_write_access_enabled: true # required for prune operations
-container_socket_proxy_api_build_enabled: true # required for pruning build cache
-container_socket_proxy_api_containers_enabled: true
-container_socket_proxy_api_images_enabled: true
-container_socket_proxy_api_network_enabled: true
-container_socket_proxy_api_volumes_enabled: true
-container_socket_proxy_api_system_enabled: true # without this setting the docker-socket-proxy instance returns a 403 error.
-# /role-specific:container_socket_proxy
+## role-specific:container_socket_proxy
+#prunemate_docker_endpoint_is_unix_socket: "{{ false if prunemate_docker_endpoint.startswith('tcp://') else true }}"
+#prunemate_docker_endpoint: "{{ container_socket_proxy_endpoint if container_socket_proxy_enabled else 'unix:///var/run/docker.sock' }}"
+#container_socket_proxy_write_access_enabled: true # required for prune operations
+#container_socket_proxy_api_build_enabled: true # required for pruning build cache
+#container_socket_proxy_api_containers_enabled: true
+#container_socket_proxy_api_images_enabled: true
+#container_socket_proxy_api_network_enabled: true
+#container_socket_proxy_api_volumes_enabled: true
+#container_socket_proxy_api_system_enabled: true # without this setting the docker-socket-proxy instance returns a 403 error.
+## /role-specific:container_socket_proxy
 
 # role-specific:traefik
 prunemate_container_labels_traefik_entrypoints: "{{ traefik_entrypoint_primary }}"
