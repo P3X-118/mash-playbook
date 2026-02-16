@@ -134,7 +134,7 @@
 - src: git+https://github.com/P3X-118/docker-ar
   version: 7.9.0-1
   name: docker
-  activation_prefix: docker_install_
+  activation_prefix: docker_install_enabled
 #- src: git+https://github.com/P3X-118/ansible-role-docker-registry.git
 #  version: v2.8.3-16
 #  name: docker_registry

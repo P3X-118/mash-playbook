@@ -67,7 +67,7 @@ rev_proxy_type: none
 
 # Controls whether to install Docker or not. NOTE: This is an opinionated docker installation. 
 # Also see `docker_python_sdk_enabled`.
-sgc_docker_install: false
+docker_install_enabled: false
 
 docker_daemon_install_options: "{{ docker_daemon_install_options_auto | combine(docker_daemon_install_options_custom, recursive=True) }}"
 
