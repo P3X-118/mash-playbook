@@ -423,10 +423,10 @@
 #  version: v1.43.3-1
 #  name: mediawiki
 #  activation_prefix: mediawiki_
-#- src: git+https://github.com/P3X-118/ansible-role-meilisearch.git
-#  version: v1.29.0-0
-#  name: meilisearch
-#  activation_prefix: meilisearch_
+- src: git+https://github.com/P3X-118/meilisearch-ar.git
+  version: 1.35.0-1
+  name: meilisearch
+  activation_prefix: meilisearch_
 #- src: git+https://seed.radicle.garden/z2arPcue4GZ6G6FY3gZexsJXqHyDs.git
 #  version: v1.6.39-1
 #  name: memcached

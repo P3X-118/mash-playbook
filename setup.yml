@@ -522,7 +522,7 @@
     # /role-specific:mediawiki
 
     # role-specific:meilisearch
-    #- role: galaxy/meilisearch
+    - role: galaxy/meilisearch
     # /role-specific:meilisearch
 
     # role-specific:memcached
