@@ -499,10 +499,10 @@
 #  version: v4.7.0-0
 #  name: nodebb
 #  activation_prefix: nodebb_
-#- src: git+https://github.com/P3X-118/ansible-role-ntfy.git
-#  version: v2.15.0-0
-#  name: ntfy
-#  activation_prefix: ntfy_
+- src: git+https://github.com/P3X-118/ntfy-ar.git
+  version: 2.15.0-1
+  name: ntfy
+  activation_prefix: ntfy_
 #- src: git+https://github.com/P3X-118/ansible-role-oauth2-proxy.git
 #  version: v7.13.0-0
 #  name: oauth2_proxy
