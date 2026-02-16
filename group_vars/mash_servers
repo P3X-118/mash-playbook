@@ -491,14 +491,14 @@ sgc_sysd_srvc_list_auto_itemized:
 
   # role-specific:immich
   - |-
-    {{ ({'name': (immich_server_identifier + '.service'), 'priority': 2000, 'groups': ['mash', 'immich']} if immich_enabled and immich_server_enabled else omit) }}
+    {{ ({'name': (immich_server_identifier + '.service'), 'priority': 2000, 'groups': ['sgc', 'immich']} if immich_enabled and immich_server_enabled else omit) }}
   - |-
-    {{ ({'name': (immich_machine_learning_identifier + '.service'), 'priority': 1500, 'groups': ['mash', 'immich']} if immich_enabled and immich_machine_learning_enabled else omit) }}
+    {{ ({'name': (immich_machine_learning_identifier + '.service'), 'priority': 1500, 'groups': ['sgc', 'immich']} if immich_enabled and immich_machine_learning_enabled else omit) }}
   # /role-specific:immich
 
   # role-specific:immich_kiosk
   - |-
-    {{ ({'name': (immich_kiosk_identifier + '.service'), 'priority': 2000, 'groups': ['mash', 'immich-kiosk']} if immich_kiosk_enabled else omit) }}
+    {{ ({'name': (immich_kiosk_identifier + '.service'), 'priority': 2000, 'groups': ['sgc', 'immich-kiosk']} if immich_kiosk_enabled else omit) }}
   # /role-specific:immich_kiosk
 
   # role-specific:infisical
@@ -952,7 +952,7 @@ sgc_sysd_srvc_list_auto_itemized:
 
   # role-specific:prometheus_postgres_exporter
   - |-
-    {{ ({'name': (prometheus_postgres_exporter_identifier + '.service'), 'priority': 500, 'groups': ['mash', 'metrics', 'prometheus-postgres-exporter']} if prometheus_postgres_exporter_enabled else omit) }}
+    {{ ({'name': (prometheus_postgres_exporter_identifier + '.service'), 'priority': 500, 'groups': ['sgc', 'metrics', 'prometheus-postgres-exporter']} if prometheus_postgres_exporter_enabled else omit) }}
   # /role-specific:prometheus_postgres_exporter
 
   # role-specific:prometheus_ssh_exporter
@@ -7205,7 +7205,7 @@ ilmo_container_labels_traefik_tls_certResolver: "{{ traefik_certResolver_primary
 #                                                                      #
 ########################################################################
 
-immich_enabled: true
+immich_enabled: false
 
 immich_identifier: "{{ service_id_prefix }}immich"
 
