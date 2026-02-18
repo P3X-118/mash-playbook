@@ -675,10 +675,10 @@
 #  version: v0.21.4-0
 #  name: readeck
 #  activation_prefix: readeck_
-#- src: git+https://github.com/P3X-118/ansible-role-redis.git
-#  version: v8.4.0-0
-#  name: redis
-#  activation_prefix: redis_
+- src: git+https://github.com/P3X-118/redis-ar.git
+  version: 8.6.0-1
+  name: redis
+  activation_prefix: redis_
 #- src: git+https://github.com/P3X-118/ansible-role-redlib.git
 #  version: v2025.4.9-9
 #  name: redlib

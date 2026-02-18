@@ -1017,7 +1017,7 @@ sgc_sysd_srvc_list_auto_itemized:
 
   # role-specific:redis
   - |-
-    {{ ({'name': (redis_identifier + '.service'), 'priority': 750, 'groups': ['mash', 'redis']} if redis_enabled else omit) }}
+    {{ ({'name': (redis_identifier + '.service'), 'priority': 750, 'groups': ['sgc', 'redis']} if redis_enabled else omit) }}
   # /role-specific:redis
 
   # role-specific:redlib

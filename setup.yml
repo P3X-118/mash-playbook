@@ -782,7 +782,7 @@
     # /role-specific:readeck
 
     # role-specific:redis
-    #- role: galaxy/redis
+    - role: galaxy/redis
     # /role-specific:redis
 
     # role-specific:redlib
